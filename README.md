@@ -4,7 +4,7 @@ A web app that consumes the [TMDB](https://www.themoviedb.org/ "TMDB's homepage"
 
 ## Directions
 
-1. Clone this repository: `git clone https://github.com/marcelovicentegc/Your-favorite-movies`
+1. Clone this repository: `git clone https://github.com/marcelovicentegc/Your-favorite-movies.git`
 2. Change directory into cloned repository: `cd Your-favorite-movies`
 3. Set an API key for TMDB on a `.env`
 4. If you are willing to use the Apollo Engine service, set an API key on the `.env` file
