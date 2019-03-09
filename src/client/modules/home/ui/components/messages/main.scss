@@ -1,0 +1,10 @@
+.message-wrapper {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+
+  p {
+    margin-block-start: 0;
+    font-size: 60%;
+  }
+}

@@ -1,0 +1,114 @@
+@import "../../../../../utils/global.scss";
+@mixin moviesDisplaySetup() {
+  height: calc(100vh - calc(90px + 130px + 1em));
+  border-top: 1px solid rgba(0, 0, 0, 0.5);
+  box-shadow: inset 0 8px 12px rgba(0, 0, 0, 0.5);
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+@mixin movieItemOnHoverOrActive() {
+  cursor: pointer;
+  transform: translate(10px, -10px);
+  filter: drop-shadow(-10px 10px 4px #000);
+}
+@mixin returnButtonOnHoverOrActive() {
+  cursor: pointer;
+  transform: translate(-10px, -10px);
+  filter: drop-shadow(10px 10px 4px #000);
+}
+
+.movies-list {
+  @include moviesDisplaySetup();
+
+  ul {
+    list-style: none;
+    padding-bottom: 1em;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+    transition: 0.2s;
+
+    li {
+      transition: 0.2s;
+      filter: drop-shadow(0 0 1px #000);
+
+      @include hover-supported() {
+        @include movieItemOnHoverOrActive();
+      }
+
+      &:active {
+        @include movieItemOnHoverOrActive();
+      }
+    }
+  }
+}
+
+.movie-details {
+  @include moviesDisplaySetup();
+
+  .movie-detail {
+    padding: 0 40px 1em 40px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+    text-align: justify;
+
+    &.movie-title {
+      padding-bottom: 0;
+    }
+
+    &.movie-budget {
+      border-bottom: none;
+    }
+
+    p {
+      &.movie-genre {
+        margin-block-start: 0;
+        margin-block-end: 0;
+        display: inline-block;
+        padding: 3px 5px;
+
+        span {
+          padding: 3px 5px;
+          background: #000;
+          border-radius: 3.5px;
+          color: #fff;
+        }
+      }
+      span {
+        justify-content: center;
+        font-size: 60%;
+
+        b {
+          font-weight: 900;
+        }
+      }
+    }
+  }
+}
+
+.button-wrapper {
+  button {
+    &.return {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      margin: 50px;
+      border-radius: 15px;
+      outline: none;
+      border: none;
+      background: transparent;
+
+      span {
+        display: block;
+        transition: 0.2s;
+        font-size: 250%;
+        filter: drop-shadow(0 0 1px #000);
+
+        @include hover-supported() {
+          @include returnButtonOnHoverOrActive();
+        }
+
+        &:active {
+          @include returnButtonOnHoverOrActive();
+        }
+      }
+    }
+  }
+}

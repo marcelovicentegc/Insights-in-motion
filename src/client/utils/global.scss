@@ -1,0 +1,27 @@
+$smallDevice: 320px;
+$mediumDevice: 760px;
+$largeDevice: 1024px;
+
+@mixin respond-to($media) {
+  @if $media == handhelds {
+    @media only screen and (max-width: $smallDevice) {
+      @content;
+    }
+  } @else if $media == medium-screens {
+    @media only screen and (min-width: $smallDevice + 1) and (max-width: $largeDevice - 1) {
+      @content;
+    }
+  } @else if $media == wide-screens {
+    @media only screen and (min-width: $largeDevice) {
+      @content;
+    }
+  }
+}
+
+@mixin hover-supported {
+  @media not all and (pointer: coarse) {
+    &:hover {
+      @content;
+    }
+  }
+}
