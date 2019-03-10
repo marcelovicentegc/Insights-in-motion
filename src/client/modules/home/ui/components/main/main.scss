@@ -1,0 +1,47 @@
+@import "../../../../../utils/global";
+
+.landing-wrapper {
+  display: grid;
+  grid-template-areas: "p a";
+  grid-template-columns: 1fr 1fr;
+  margin: 0 auto;
+  padding: 20px;
+  max-width: 960px;
+  font-size: 22px;
+
+  @include respond-to(wide-handhelds) {
+    display: grid;
+    grid-template-rows: 0.1fr 0.1fr;
+    grid-template-columns: 1fr;
+  }
+
+  .presentation {
+    text-align: justify;
+
+    @include respond-to(wide-handhelds) {
+      display: grid;
+      grid-row: 2;
+      font-size: 80%;
+    }
+  }
+
+  .go-to-app {
+    display: grid;
+    text-align: center;
+    align-content: center;
+
+    @include respond-to(wide-handhelds) {
+      grid-row: 1;
+    }
+
+    @include respond-to(handhelds) {
+      grid-row: 1;
+      font-size: 80%;
+    }
+
+    .logo-wrapper {
+      margin-top: 2vh;
+      margin-bottom: 2vh;
+    }
+  }
+}

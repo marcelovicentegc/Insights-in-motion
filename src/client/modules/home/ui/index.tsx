@@ -1,15 +1,14 @@
 import * as React from "react";
-import Movies from "./components/movies/index";
+import LandingPage from "./components/main/LandingPage";
+import Nav from "./components/shared/Nav";
 import "./main.scss";
 
-export default class HomeView extends React.Component {
+export default class LandingView extends React.Component {
   render() {
     return (
       <>
-        <div className="nav">
-          <p>🎥</p>
-        </div>
-        <Movies />
+        <Nav />
+        <LandingPage />
       </>
     );
   }

@@ -10,6 +10,7 @@ export class MoviesStore {
 
   @observable public movieList: boolean = true;
   @observable public selectedMovie: number = undefined;
+  @observable public query: string = "";
 
   @action public handleMovieView = () => {
     this.movieList ? (this.movieList = false) : (this.movieList = true);

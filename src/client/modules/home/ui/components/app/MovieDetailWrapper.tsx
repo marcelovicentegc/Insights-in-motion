@@ -17,14 +17,12 @@ interface Props {
 
 export default class MovieDetailWrapper extends React.Component<Props> {
   render() {
-    console.log(this.props.movieId);
     return (
       <Query<GetMovieQuery, GetMovieVariables>
         query={getMovie}
         variables={{ id: this.props.movieId }}
       >
         {({ data, loading }) => {
-          console.log(data);
           if (loading) return <Loading />;
           if (!data) return <NoData />;
           if (data.movie === null) return <TypeInYourFavoriteMovie />;

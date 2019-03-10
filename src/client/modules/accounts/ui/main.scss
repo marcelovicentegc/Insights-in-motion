@@ -1,0 +1,101 @@
+@import "../../../utils/global.scss";
+
+.logo-wrapper {
+  display: grid;
+  margin-top: 10vh;
+  margin-bottom: 60px;
+  justify-content: center;
+  align-content: center;
+
+  a {
+    text-decoration: none;
+    background-color: #fff;
+    border-radius: 50%;
+    border: 1px solid #d1d5da;
+    padding: 10px;
+    transition: 0.2s;
+
+    @include hover-supported() {
+      transform: scale(1.2);
+      background-color: $theDarkBlue;
+    }
+  }
+}
+
+.form-wrapper {
+  display: grid;
+  margin: 0 auto;
+  width: 340px;
+
+  .form {
+    display: grid;
+    border-radius: 5px;
+    padding: 16px;
+    background-color: #fff;
+    border: 1px solid #d1d5da;
+
+    label {
+      font-size: 16px;
+      margin-bottom: 7px;
+      display: block;
+    }
+
+    input {
+      border: 1px solid #d1d5da;
+      margin-bottom: 15px;
+      margin-top: 5px;
+      padding: 6px 8px;
+    }
+
+    ::selection {
+      color: $theGreen;
+    }
+
+    &.login-callout {
+      display: grid;
+      justify-content: center;
+      margin-top: 16px;
+
+      label {
+        margin-bottom: 0;
+      }
+
+      a {
+        text-decoration: none;
+        color: $theBlue;
+        transition: 0.2s;
+
+        @include hover-supported() {
+          color: $theGreen;
+        }
+      }
+    }
+
+    button {
+      position: relative;
+      display: inline-block;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 20px;
+      width: 100%;
+      background-color: #28a745;
+      background-image: linear-gradient(-180deg, $theGreen, #28a745 90%);
+      background-position: -1px -1px;
+      color: #fff;
+      border: 1px solid rgba(27, 31, 35, 0.2);
+      border-radius: 0.25em;
+      margin-top: 10px;
+      padding: 6px 12px;
+      transition: 0.2s;
+
+      @include hover-supported() {
+        cursor: pointer;
+        background-color: #269f42;
+        background-image: linear-gradient(-180deg, $theGreen, #269f42 90%);
+        background-position: -0.5em;
+        border-color: rgba(27, 31, 35, 0.5);
+      }
+    }
+  }
+}

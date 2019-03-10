@@ -1,0 +1,61 @@
+@import "../../../../../utils/global";
+
+.nav {
+  display: inline-flex;
+  height: 80px;
+  width: 100vw;
+  font-size: 80%;
+  white-space: nowrap;
+
+  @include respond-to(handhelds) {
+    height: 40px;
+  }
+
+  li {
+    list-style: none;
+
+    &.nav-item {
+      position: absolute;
+      top: 10px;
+    }
+
+    &#first {
+      right: 20px;
+    }
+
+    &#second {
+      right: 120px;
+      margin-right: 20px;
+    }
+
+    &#third {
+      left: 20px;
+      top: 5px;
+      transition: 0.2s;
+
+      a {
+        @include hover-supported() {
+          cursor: pointer;
+          color: #fff;
+        }
+      }
+
+      @include respond-to(wide-handhelds) {
+        margin-left: 0px;
+        opacity: 0;
+      }
+    }
+
+    a {
+      text-decoration: none;
+      text-transform: lowercase;
+      color: #fff;
+      transition: 0.2s;
+
+      @include hover-supported() {
+        cursor: pointer;
+        color: $theDarkBlue;
+      }
+    }
+  }
+}

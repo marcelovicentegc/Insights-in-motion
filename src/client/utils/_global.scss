@@ -1,10 +1,15 @@
 $smallDevice: 320px;
+$intermediaryDevice: 600px;
 $mediumDevice: 760px;
 $largeDevice: 1024px;
 
 @mixin respond-to($media) {
   @if $media == handhelds {
     @media only screen and (max-width: $smallDevice) {
+      @content;
+    }
+  } @else if $media == wide-handhelds {
+    @media only screen and (max-width: $intermediaryDevice) {
       @content;
     }
   } @else if $media == medium-screens {
@@ -25,3 +30,7 @@ $largeDevice: 1024px;
     }
   }
 }
+
+$theBlue: #0366d6;
+$theGreen: #01d277;
+$theDarkBlue: #185269;

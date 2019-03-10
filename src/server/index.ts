@@ -3,6 +3,7 @@ import { ApolloServer } from "apollo-server-express";
 import * as bodyParser from "body-parser";
 import * as dotenv from "dotenv";
 import * as express from "express";
+import * as session from "express-session";
 import "reflect-metadata";
 import { createConnection } from "typeorm";
 import schema from "./schema/schema";
@@ -31,15 +32,24 @@ const startServer = async () => {
     },
     tracing: true,
     cacheControl: true,
-    context: {
+    context: ({ req, res }: any) => ({
+      req,
+      res,
       secret: {
         API_KEY: process.env.TMDB_API_KEY
       }
-    },
+    }),
     engine: false
   });
 
   const app = express();
+  app.use(
+    session({
+      secret: "9314i192481290",
+      resave: false,
+      saveUninitialized: false
+    })
+  );
   app.use(bodyParser.json());
   server.applyMiddleware({
     app,

@@ -1,5 +1,16 @@
 import gql from "graphql-tag";
 
+export const getUser = gql`
+  query GetUser {
+    user {
+      id
+      email
+      username
+      password
+    }
+  }
+`;
+
 export const getMovies = gql`
   query GetMovies($query: String!) {
     movies(query: $query) {
@@ -41,6 +52,18 @@ export const getMovieGenres = gql`
     movie_genres {
       id
       name
+    }
+  }
+`;
+
+export const getConfig = gql`
+  query GetConfig {
+    config {
+      images {
+        poster_sizes
+        base_url
+        secure_base_url
+      }
     }
   }
 `;
