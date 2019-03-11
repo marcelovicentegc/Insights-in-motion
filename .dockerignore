@@ -1,6 +1,6 @@
 node_modules
 dist
-.env
 ormconfig.js
+pgdata
 yarn-error.log
-future.txt
+.env.example

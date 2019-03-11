@@ -38,11 +38,20 @@
           cursor: pointer;
           color: #fff;
         }
+
+        &:active {
+          cursor: pointer;
+          color: #fff;
+        }
       }
 
       @include respond-to(wide-handhelds) {
         margin-left: 0px;
         opacity: 0;
+      }
+
+      @include respond-to(medium-handhelds) {
+        display: none;
       }
     }
 
@@ -53,6 +62,11 @@
       transition: 0.2s;
 
       @include hover-supported() {
+        cursor: pointer;
+        color: $theDarkBlue;
+      }
+
+      &:active {
         cursor: pointer;
         color: $theDarkBlue;
       }

@@ -32,7 +32,7 @@ export default class Nav extends React.Component {
                     </li>
                     <li className="nav-item" id="second">
                       <Link to="/settings" title="Go to account settings">
-                        {data.user.username}
+                        account
                       </Link>
                     </li>
                   </>

@@ -44,7 +44,7 @@ const resolvers: IResolvers = {
     }
   },
   Mutation: {
-    createUser: async (_, { email, username, password }) => {
+    createUser: async (_, { email, username, password }, { req }) => {
       const hashedPassword = await bcrypt.hash(password, 12);
       const user = User.create({
         email: email,
@@ -52,12 +52,19 @@ const resolvers: IResolvers = {
         password: hashedPassword
       });
       await user.save();
+      req.session.userId = user.id;
       return user;
     },
-    updateUser: async (_, { id }) => {
+    updateUser: async (_, { id, email, username, password }) => {
       try {
-        await User.remove(id);
+        const hashedPassword = await bcrypt.hash(password, 12);
+        await User.update(id, {
+          email: email,
+          username: username,
+          password: hashedPassword
+        });
       } catch (err) {
+        console.log(err);
         return false;
       }
       return true;
@@ -66,6 +73,7 @@ const resolvers: IResolvers = {
       try {
         await User.remove(id);
       } catch (err) {
+        console.log(err);
         return false;
       }
       return true;

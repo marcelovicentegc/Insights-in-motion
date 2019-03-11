@@ -29,8 +29,8 @@ class Login extends React.Component<RouteComponentProps<{}>, State> {
         <Logo to="/" title="Go to the landing page" />
         <Mutation<LoginUserMutation, LoginUserVariables> mutation={loginUser}>
           {mutate => (
-            <div className="login-wrapper form-wrapper">
-              <div className="login form">
+            <div className="form-wrapper" id="login-form-wrapper ">
+              <div className="form" id="login-form">
                 <label>Email adress</label>
                 <input
                   type="text"
@@ -55,7 +55,7 @@ class Login extends React.Component<RouteComponentProps<{}>, State> {
                   Sign in
                 </button>
               </div>
-              <div className="login-callout form">
+              <div className="form" id="form-callout">
                 <label>
                   Don't have an account? <Link to="/join">Create one.</Link>
                 </label>

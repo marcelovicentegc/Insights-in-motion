@@ -1,13 +1,11 @@
 import { ApolloEngine } from "apollo-engine";
 import { ApolloServer } from "apollo-server-express";
 import * as bodyParser from "body-parser";
-import * as dotenv from "dotenv";
 import * as express from "express";
 import * as session from "express-session";
 import "reflect-metadata";
 import { createConnection } from "typeorm";
 import schema from "./schema/schema";
-dotenv.config();
 
 const startServer = async () => {
   let retries = 5;

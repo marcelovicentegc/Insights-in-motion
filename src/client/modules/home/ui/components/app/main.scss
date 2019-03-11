@@ -30,12 +30,20 @@
       transition: 0.2s;
       filter: drop-shadow(0 0 1px #000);
 
+      @include respond-to(medium-handhelds) {
+        filter: none;
+      }
+
       @include hover-supported() {
         @include movieItemOnHoverOrActive();
       }
 
       &:active {
         @include movieItemOnHoverOrActive();
+      }
+
+      @include respond-to(medium-handhelds) {
+        font-size: 80%;
       }
     }
   }

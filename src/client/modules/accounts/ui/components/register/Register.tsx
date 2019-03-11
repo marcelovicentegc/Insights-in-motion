@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Mutation } from "react-apollo";
-import { RouteComponentProps, withRouter } from "react-router-dom";
+import { Link, RouteComponentProps, withRouter } from "react-router-dom";
 import { createUser } from "../../../../../../server/schema/graphql/Mutations.graphql";
 import {
   CreateUserMutation,
@@ -34,8 +34,8 @@ class Register extends React.Component<RouteComponentProps<{}>, State> {
           mutation={createUser}
         >
           {mutate => (
-            <div className="join-us-wrapper form-wrapper">
-              <div className="join-us form">
+            <div className="form-wrapper" id="join-us-form-wrapper">
+              <div className="form" id="join-us-form">
                 <label>Email adress</label>
                 <input
                   type="text"
@@ -65,6 +65,11 @@ class Register extends React.Component<RouteComponentProps<{}>, State> {
                 >
                   Create an account
                 </button>
+              </div>
+              <div className="form" id="form-callout">
+                <label>
+                  Already have an account? <Link to="/login">Sign in.</Link>
+                </label>
               </div>
             </div>
           )}

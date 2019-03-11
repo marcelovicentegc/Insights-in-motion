@@ -1,4 +1,5 @@
 $smallDevice: 320px;
+$almostASmallDevice: 485px;
 $intermediaryDevice: 600px;
 $mediumDevice: 760px;
 $largeDevice: 1024px;
@@ -6,6 +7,10 @@ $largeDevice: 1024px;
 @mixin respond-to($media) {
   @if $media == handhelds {
     @media only screen and (max-width: $smallDevice) {
+      @content;
+    }
+  } @else if $media == medium-handhelds {
+    @media only screen and (max-width: $almostASmallDevice) {
       @content;
     }
   } @else if $media == wide-handhelds {

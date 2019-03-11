@@ -14,8 +14,8 @@ class LandingPage extends React.Component<RouteComponentProps<{}>> {
         <div className="landing-wrapper">
           <div className="presentation">
             <p>
-              This is how it works: you type in any movie you wonder about in
-              our search bar and get its details. Just like magic!
+              This is how it works: you type in any movie title in the search
+              bar and automagically get it!
             </p>
           </div>
           <div className="go-to-app">
