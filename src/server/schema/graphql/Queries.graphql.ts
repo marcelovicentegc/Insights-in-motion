@@ -7,6 +7,18 @@ export const getUser = gql`
       email
       username
       password
+      movies {
+        movieId
+      }
+    }
+  }
+`;
+
+export const getMoviesByUser = gql`
+  query GetMoviesByUser {
+    moviesByUser {
+      movieId
+      userId
     }
   }
 `;

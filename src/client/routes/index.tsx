@@ -3,8 +3,9 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import LoginConnector from "../modules/accounts/connectors/LoginConnector";
 import RegisterConnector from "../modules/accounts/connectors/RegisterConnector";
 import AccountSettingsConnector from "../modules/accounts/connectors/SettingsConnector";
-import AppConnector from "../modules/home/connectors/AppConnector";
-import LandingConnector from "../modules/home/connectors/LadingConnector";
+import AppConnector from "../modules/app/connectors/AppConnector";
+import CustomListConnector from "../modules/app/connectors/CustomListConnector";
+import LandingConnector from "../modules/app/connectors/LandingConnector";
 
 export const Routes = () => {
   return (
@@ -12,6 +13,7 @@ export const Routes = () => {
       <Switch>
         <Route exact={true} path="/" component={LandingConnector} />
         <Route exact={true} path="/app" component={AppConnector} />
+        <Route exact={true} path="/list" component={CustomListConnector} />
         <Route exact={true} path="/login" component={LoginConnector} />
         <Route exact={true} path="/join" component={RegisterConnector} />
         <Route

@@ -6,4 +6,4 @@ COPY . .
 RUN yarn build
 COPY ormconfig.example.json ./ormconfig.json
 EXPOSE 3000
-CMD ["yarn", "start"]
+CMD ["yarn", "test-alone"]

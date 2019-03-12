@@ -2,7 +2,7 @@ import * as React from "react";
 import { Query } from "react-apollo";
 import { GetUserQuery } from "../../../../client/__types__/typeDefs";
 import { getUser } from "../../../../server/schema/graphql/Queries.graphql";
-import Loading from "../../home/ui/components/messages/Loading";
+import Loading from "../../app/ui/components/messages/Loading";
 import Login from "./components/logging/Login";
 
 export default class Accounts extends React.Component {

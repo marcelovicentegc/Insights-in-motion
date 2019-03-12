@@ -13,8 +13,8 @@ export const createUser = gql`
       password: $password
       avatar: $avatar
     ) {
-      email
-      username
+      path
+      message
     }
   }
 `;
@@ -54,5 +54,20 @@ export const loginUser = gql`
 export const logoutUser = gql`
   mutation LogoutUser {
     logoutUser
+  }
+`;
+
+export const appendMovie = gql`
+  mutation AppendMovie($movieId: Int, $userId: String) {
+    appendMovie(movieId: $movieId, userId: $userId) {
+      movieId
+      userId
+    }
+  }
+`;
+
+export const dettachMovie = gql`
+  mutation DettachMovie($movieId: Int) {
+    dettachMovie(movieId: $movieId)
   }
 `;

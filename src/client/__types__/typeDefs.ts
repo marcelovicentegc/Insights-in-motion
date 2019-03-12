@@ -16,15 +16,15 @@ export type CreateUserVariables = {
 export type CreateUserMutation = {
   __typename?: "Mutation";
 
-  createUser: CreateUserCreateUser;
+  createUser: Maybe<CreateUserCreateUser[]>;
 };
 
 export type CreateUserCreateUser = {
-  __typename?: "User";
+  __typename?: "Error";
 
-  email: string;
+  path: string;
 
-  username: string;
+  message: string;
 };
 
 export type UpdateUserVariables = {
@@ -76,6 +76,35 @@ export type LogoutUserMutation = {
   logoutUser: boolean;
 };
 
+export type AppendMovieVariables = {
+  movieId?: Maybe<number>;
+  userId?: Maybe<string>;
+};
+
+export type AppendMovieMutation = {
+  __typename?: "Mutation";
+
+  appendMovie: Maybe<AppendMovieAppendMovie>;
+};
+
+export type AppendMovieAppendMovie = {
+  __typename?: "UserMovies";
+
+  movieId: Maybe<number>;
+
+  userId: Maybe<string>;
+};
+
+export type DettachMovieVariables = {
+  movieId?: Maybe<number>;
+};
+
+export type DettachMovieMutation = {
+  __typename?: "Mutation";
+
+  dettachMovie: boolean;
+};
+
 export type GetUserVariables = {};
 
 export type GetUserQuery = {
@@ -87,13 +116,37 @@ export type GetUserQuery = {
 export type GetUserUser = {
   __typename?: "User";
 
-  id: number;
+  id: string;
 
   email: string;
 
   username: string;
 
   password: string;
+
+  movies: Maybe<(Maybe<GetUserMovies>)[]>;
+};
+
+export type GetUserMovies = {
+  __typename?: "UserMovies";
+
+  movieId: Maybe<number>;
+};
+
+export type GetMoviesByUserVariables = {};
+
+export type GetMoviesByUserQuery = {
+  __typename?: "Query";
+
+  moviesByUser: Maybe<(Maybe<GetMoviesByUserMoviesByUser>)[]>;
+};
+
+export type GetMoviesByUserMoviesByUser = {
+  __typename?: "UserMovies";
+
+  movieId: Maybe<number>;
+
+  userId: Maybe<string>;
 };
 
 export type GetMoviesVariables = {

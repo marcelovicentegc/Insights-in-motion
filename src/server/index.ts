@@ -7,12 +7,12 @@ import "reflect-metadata";
 import { createConnection } from "typeorm";
 import schema from "./schema/schema";
 
-const startServer = async () => {
+export const startServer = async () => {
   let retries = 5;
   while (retries) {
     try {
       await createConnection().then(connection => {
-        console.log("Connected to remote database");
+        console.log("Connected to remote empty database");
       });
       break;
     } catch (err) {
