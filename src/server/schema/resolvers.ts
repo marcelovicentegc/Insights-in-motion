@@ -38,17 +38,6 @@ const resolvers: IResolvers = {
       return User.findOne(req.session.userId, { relations: ["movies"] });
     },
     users: async () => User.find(),
-    moviesByUser: async (_, __, { req }) => {
-      let user = req.session.userId;
-      await Movies.createQueryBuilder("movieId")
-        .where("movies.userId = :user", {
-          userId: user
-        })
-        .getMany();
-      // await User.createQueryBuilder('movies').where('movies.movieId = :movieId', {
-      //   movieId:
-      // })
-    },
     movies: async (_, args, context) => {
       return await fetch(
         `${TMDB_API_URL}/search/movie?api_key=${context.secret.API_KEY}&query=${
@@ -131,8 +120,8 @@ const resolvers: IResolvers = {
           username: username,
           password: hashedPassword
         });
-      } catch (err) {
-        console.log(err);
+      } catch (error) {
+        console.log(error);
         return false;
       }
       return true;
@@ -140,8 +129,8 @@ const resolvers: IResolvers = {
     deleteUser: async (_, { id }) => {
       try {
         await User.remove(id);
-      } catch (err) {
-        console.log(err);
+      } catch (error) {
+        console.log(error);
         return false;
       }
       return true;
@@ -176,7 +165,6 @@ const resolvers: IResolvers = {
       let movie = new Movies();
       movie.user = userId;
       movie.movieId = movieId;
-      console.log(movie);
       await Movies.save(movie);
       return movie;
     },

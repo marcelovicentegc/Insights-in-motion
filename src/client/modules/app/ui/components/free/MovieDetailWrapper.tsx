@@ -13,22 +13,30 @@ import MovieDetail from "./MovieDetail";
 interface Props {
   movieId: number;
   key?: number;
+  withALoggedInUser: boolean;
 }
 
 export default class MovieDetailWrapper extends React.Component<Props> {
   render() {
     return (
-      <Query<GetMovieQuery, GetMovieVariables>
-        query={getMovie}
-        variables={{ id: this.props.movieId }}
-      >
-        {({ data, loading }) => {
-          if (loading) return <Loading />;
-          if (!data) return <NoData />;
-          if (data.movie === null) return <TypeInYourFavoriteMovie />;
-          return <MovieDetail movie={data.movie} />;
-        }}
-      </Query>
+      <>
+        <Query<GetMovieQuery, GetMovieVariables>
+          query={getMovie}
+          variables={{ id: this.props.movieId }}
+        >
+          {({ data, loading }) => {
+            if (loading) return <Loading />;
+            if (!data) return <NoData />;
+            if (data.movie === null) return <TypeInYourFavoriteMovie />;
+            return (
+              <MovieDetail
+                movie={data.movie}
+                withALoggedInUser={this.props.withALoggedInUser}
+              />
+            );
+          }}
+        </Query>
+      </>
     );
   }
 }

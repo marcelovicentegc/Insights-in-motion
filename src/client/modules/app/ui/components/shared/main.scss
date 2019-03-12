@@ -39,6 +39,10 @@
           color: #fff;
         }
 
+        span:after {
+          content: "insights in motion 🎥";
+        }
+
         &:active {
           cursor: pointer;
           color: #fff;
@@ -46,12 +50,29 @@
       }
 
       @include respond-to(wide-handhelds) {
-        margin-left: 0px;
-        opacity: 0;
+        a {
+          span:after {
+            content: "home";
+          }
+        }
       }
 
       @include respond-to(medium-handhelds) {
-        display: none;
+        a {
+          top: 10px;
+
+          span:after {
+            content: "home";
+          }
+        }
+      }
+
+      @include respond-to(wide-handhelds) {
+        top: 10px;
+      }
+
+      @include respond-to(medium-handhelds) {
+        top: 10px;
       }
     }
 

@@ -11,10 +11,8 @@ export default class MoviesOnAListWrapper extends React.Component {
         {({ data, loading }) => {
           if (loading) return null;
           if (!data) {
-            console.log("Got undefined");
             return <MoviesOnAList withALoggedInUser={false} user={null} />;
           }
-          console.log("Got " + data.user.username);
           return <MoviesOnAList withALoggedInUser={true} user={data.user} />;
         }}
       </Query>

@@ -21,10 +21,15 @@ export default class AccountSettings extends React.Component {
             return (
               <>
                 <Nav />
-                <EditAccount user={data.user} />
                 <div className="list-wrapper">
-                  <Link to="/list">📝</Link>
+                  <Link
+                    to="/list"
+                    title="Visit the movies you added to your list"
+                  >
+                    📝
+                  </Link>
                 </div>
+                <EditAccount user={data.user} />
                 {/* stats */}
               </>
             );

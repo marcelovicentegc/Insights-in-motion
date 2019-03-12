@@ -16,10 +16,10 @@ export default class Nav extends React.Component {
               if (!data || !data.user)
                 return (
                   <>
-                    <li className="nav-item" id="first">
+                    <li className="nav-item" id="first" title="Sign up">
                       <Link to="/join">sign up</Link>
                     </li>
-                    <li className="nav-item" id="second">
+                    <li className="nav-item" id="second" title="Sign in">
                       <Link to="/login">sign in</Link>
                     </li>
                   </>
@@ -27,7 +27,7 @@ export default class Nav extends React.Component {
               if (data.user)
                 return (
                   <>
-                    <li className="nav-item" id="first">
+                    <li className="nav-item" id="first" title="Sign out">
                       <Logout />
                     </li>
                     <li className="nav-item" id="second">
@@ -40,7 +40,9 @@ export default class Nav extends React.Component {
             }}
           </Query>
           <li className="nav-item" id="third">
-            <Link to="/">insights in motion 🎥</Link>
+            <Link to="/" title="Go to the home page">
+              <span />
+            </Link>
           </li>
         </div>
       </>

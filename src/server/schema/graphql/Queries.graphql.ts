@@ -14,15 +14,6 @@ export const getUser = gql`
   }
 `;
 
-export const getMoviesByUser = gql`
-  query GetMoviesByUser {
-    moviesByUser {
-      movieId
-      userId
-    }
-  }
-`;
-
 export const getMovies = gql`
   query GetMovies($query: String!) {
     movies(query: $query) {
@@ -55,6 +46,25 @@ export const getMovie = gql`
         name
       }
       release_date
+      popularity
+      production_companies {
+        name
+        id
+        origin_country
+      }
+      production_countries {
+        iso_3166_1
+        name
+      }
+      revenue
+      spoken_languages {
+        iso_639_1
+        name
+      }
+      status
+      tagline
+      vote_average
+      vote_count
     }
   }
 `;

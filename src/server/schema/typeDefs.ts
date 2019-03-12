@@ -32,6 +32,31 @@ const typeDefs = gql`
     genres: [Genre]
     genre_ids: [Int]
     release_date: String
+    popularity: String
+    production_companies: [ProductionCompanies]
+    production_countries: [ProductionCountries]
+    revenue: Int
+    spoken_languages: [SpokenLanguages]
+    status: String
+    tagline: String
+    vote_average: String
+    vote_count: Int
+  }
+
+  type ProductionCompanies {
+    name: String
+    id: Int
+    origin_country: String
+  }
+
+  type ProductionCountries {
+    iso_3166_1: String
+    name: String
+  }
+
+  type SpokenLanguages {
+    iso_639_1: String
+    name: String
   }
 
   type Images {
@@ -44,18 +69,9 @@ const typeDefs = gql`
     images: Images
   }
 
-  type DiscoverMovie {
-    id: Int
-    title: String
-    poster_path: String
-    backdrop_path: String
-    popularity: Int
-  }
-
   type Query {
     users: [User!]!
     user: User!
-    moviesByUser: [UserMovies]
     movies(query: String!): [Movie]
     movie(id: Int!): Movie
     movie_genres: [Genre]

@@ -87,6 +87,7 @@ export default class MoviesOnAList extends React.Component<Props> {
                 </>
               ) : (
                 <MovieDetailWrapper
+                  withALoggedInUser={true}
                   movieId={this.props.moviesStore.selectedMovie}
                 />
               )}
@@ -132,6 +133,7 @@ export default class MoviesOnAList extends React.Component<Props> {
                 </>
               ) : (
                 <MovieDetailWrapper
+                  withALoggedInUser={false}
                   movieId={this.props.moviesStore.selectedMovie}
                 />
               )}

@@ -133,22 +133,6 @@ export type GetUserMovies = {
   movieId: Maybe<number>;
 };
 
-export type GetMoviesByUserVariables = {};
-
-export type GetMoviesByUserQuery = {
-  __typename?: "Query";
-
-  moviesByUser: Maybe<(Maybe<GetMoviesByUserMoviesByUser>)[]>;
-};
-
-export type GetMoviesByUserMoviesByUser = {
-  __typename?: "UserMovies";
-
-  movieId: Maybe<number>;
-
-  userId: Maybe<string>;
-};
-
 export type GetMoviesVariables = {
   query: string;
 };
@@ -215,12 +199,56 @@ export type GetMovieMovie = {
   genres: Maybe<(Maybe<GetMovieGenres>)[]>;
 
   release_date: Maybe<string>;
+
+  popularity: Maybe<string>;
+
+  production_companies: Maybe<(Maybe<GetMovieProductionCompanies>)[]>;
+
+  production_countries: Maybe<(Maybe<GetMovieProductionCountries>)[]>;
+
+  revenue: Maybe<number>;
+
+  spoken_languages: Maybe<(Maybe<GetMovieSpokenLanguages>)[]>;
+
+  status: Maybe<string>;
+
+  tagline: Maybe<string>;
+
+  vote_average: Maybe<string>;
+
+  vote_count: Maybe<number>;
 };
 
 export type GetMovieGenres = {
   __typename?: "Genre";
 
   id: Maybe<number>;
+
+  name: Maybe<string>;
+};
+
+export type GetMovieProductionCompanies = {
+  __typename?: "ProductionCompanies";
+
+  name: Maybe<string>;
+
+  id: Maybe<number>;
+
+  origin_country: Maybe<string>;
+};
+
+export type GetMovieProductionCountries = {
+  __typename?: "ProductionCountries";
+
+  iso_3166_1: Maybe<string>;
+
+  name: Maybe<string>;
+};
+
+export type GetMovieSpokenLanguages = {
+  __typename?: "SpokenLanguages";
+
+  iso_639_1: Maybe<string>;
 
   name: Maybe<string>;
 };
