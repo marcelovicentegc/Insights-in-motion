@@ -3,7 +3,7 @@ import * as React from "react";
 import { MoviesStore } from "../../../../../stores/Movies.store";
 import { GetMovieMovie } from "../../../../../__types__/typeDefs";
 import ExtraMovieDetail from "./ExtraMovieDetails";
-import FreeMovieDetail from "./freeMovieDetails";
+import FreeMovieDetail from "./FreeMovieDetails";
 import ReturnButton from "./movieDetails/ReturnButton";
 import Tagline from "./movieDetails/Tagline";
 
