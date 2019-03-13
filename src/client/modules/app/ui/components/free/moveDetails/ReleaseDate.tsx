@@ -7,9 +7,10 @@ interface Props {
 const ReleaseDate: React.FC<Props> = props => {
   return (
     <div className="movie-release-date movie-detail">
-      <p>Release date</p>
       <p>
-        <span>{props.release_date}</span>
+        <span>
+          <b>Release date</b>: {props.release_date}
+        </span>
       </p>
     </div>
   );

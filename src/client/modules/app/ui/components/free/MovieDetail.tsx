@@ -5,7 +5,6 @@ import { GetMovieMovie } from "../../../../../__types__/typeDefs";
 import CashFlow from "./moveDetails/CashFlow";
 import Genres from "./moveDetails/Genres";
 import Overview from "./moveDetails/Overview";
-import Popularity from "./moveDetails/Popularity";
 import ReleaseDate from "./moveDetails/ReleaseDate";
 import ReturnButton from "./moveDetails/ReturnButton";
 import Tagline from "./moveDetails/Tagline";
@@ -33,16 +32,16 @@ export default class MovieDetail extends React.Component<Props> {
             <Tagline tagline={this.props.movie.tagline} />
             <div className="movie-details">
               <Title title={this.props.movie.title} />
-              <Votes
-                vote_count={this.props.movie.vote_count}
-                vote_average={this.props.movie.vote_average}
-              />
               <Overview overview={this.props.movie.overview} />
               <Genres movie={this.props.movie} />
-              <Popularity popularity={this.props.movie.popularity} />
               <CashFlow
                 budget={this.props.movie.budget}
                 revenue={this.props.movie.revenue}
+              />
+              <Votes
+                vote_count={this.props.movie.vote_count}
+                vote_average={this.props.movie.vote_average}
+                popularity={this.props.movie.popularity}
               />
               <ReleaseDate release_date={this.props.movie.release_date} />
             </div>
