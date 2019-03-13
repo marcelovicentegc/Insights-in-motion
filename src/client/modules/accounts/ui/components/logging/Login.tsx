@@ -1,17 +1,17 @@
+import { inject, observer } from "mobx-react";
 import * as React from "react";
 import { Mutation } from "react-apollo";
 import { Link, RouteComponentProps, withRouter } from "react-router-dom";
 import { loginUser } from "../../../../../../server/schema/graphql/Mutations.graphql";
-import { AccountsStore } from "../../../../../stores/Accounts.store";
+import { MoviesStore } from "../../../../../stores/Movies.store";
 import {
   LoginUserMutation,
   LoginUserVariables
 } from "../../../../../__types__/typeDefs";
-import Nav from "../../../../main/ui/components/shared/Nav";
 import Logo from "../shared/Logo";
 
 interface Props extends RouteComponentProps {
-  accountsStore?: AccountsStore;
+  moviesStore?: MoviesStore;
 }
 
 interface State {
@@ -19,6 +19,8 @@ interface State {
   password: string;
 }
 
+@inject("moviesStore")
+@observer
 class Login extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
@@ -29,10 +31,14 @@ class Login extends React.Component<Props, State> {
     };
   }
 
+  resetQuery = () => {
+    this.props.moviesStore.resetQuery();
+  };
+
   render() {
     return (
       <>
-        <Nav />
+        {this.resetQuery()}
         <Logo to="/" title="Go to the landing page" icon="🎥" />
         <Mutation<LoginUserMutation, LoginUserVariables> mutation={loginUser}>
           {mutate => (

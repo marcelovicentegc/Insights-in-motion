@@ -12,6 +12,10 @@ export class MoviesStore {
   @observable public selectedMovie: number = undefined;
   @observable public query: string = "";
 
+  @action public resetQuery = () => {
+    this.query = "";
+  };
+
   @action public handleMovieView = () => {
     this.movieList ? (this.movieList = false) : (this.movieList = true);
   };

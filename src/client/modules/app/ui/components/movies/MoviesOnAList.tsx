@@ -13,9 +13,9 @@ import NoData from "../messages/NoData";
 import NoSuchTitle from "../messages/NoSuchTitle";
 import NumberOfResults from "../messages/NumberOfResults";
 import TypeInYourFavoriteMovie from "../messages/TypeIn";
-import AddMovieToListBtn from "../subscribed/AddMovieToListBtn";
-import RemoveMovieFromListBtn from "../subscribed/RemoveMovieFromListBtn";
+import AddMovieToListBtn from "./AddMovieToListBtn";
 import MovieDetailWrapper from "./MovieDetailWrapper";
+import RemoveMovieFromListBtn from "./RemoveMovieFromListBtn";
 
 interface Props {
   moviesStore?: MoviesStore;

@@ -11,13 +11,17 @@ const CashFlow: React.FC<Props> = props => {
       <p>
         <span>
           <b>Budget</b>: $
-          {props.budget.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,")}
+          {props.budget !== null
+            ? props.budget.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,")
+            : null}
         </span>
       </p>
       <p>
         <span>
           <b>Revenue</b>: $
-          {props.revenue.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,")}
+          {props.revenue !== null
+            ? props.revenue.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,")
+            : null}
         </span>
       </p>
     </div>

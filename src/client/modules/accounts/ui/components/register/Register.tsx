@@ -1,14 +1,19 @@
+import { inject, observer } from "mobx-react";
 import * as React from "react";
 import { Mutation } from "react-apollo";
 import { Link, RouteComponentProps, withRouter } from "react-router-dom";
 import { createUser } from "../../../../../../server/schema/graphql/Mutations.graphql";
+import { MoviesStore } from "../../../../../stores/Movies.store";
 import {
   CreateUserMutation,
   CreateUserVariables
 } from "../../../../../__types__/typeDefs";
-import Nav from "../../../../main/ui/components/shared/Nav";
-import "../../main.scss";
 import Logo from "../shared/Logo";
+import "../shared/main.scss";
+
+interface Props extends RouteComponentProps {
+  moviesStore?: MoviesStore;
+}
 
 interface State {
   email: string;
@@ -16,8 +21,10 @@ interface State {
   password: string;
 }
 
-class Register extends React.Component<RouteComponentProps<{}>, State> {
-  constructor(props: RouteComponentProps) {
+@inject("moviesStore")
+@observer
+class Register extends React.Component<Props, State> {
+  constructor(props: Props) {
     super(props);
 
     this.state = {
@@ -27,10 +34,14 @@ class Register extends React.Component<RouteComponentProps<{}>, State> {
     };
   }
 
+  resetQuery = () => {
+    this.props.moviesStore.resetQuery();
+  };
+
   render() {
     return (
       <>
-        <Nav />
+        {this.resetQuery()}
         <Logo to="/" title="Go to the landing page" icon="🎥" />
         <Mutation<CreateUserMutation, CreateUserVariables>
           mutation={createUser}

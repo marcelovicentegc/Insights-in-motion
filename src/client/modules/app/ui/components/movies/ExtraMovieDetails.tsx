@@ -1,8 +1,8 @@
 import * as React from "react";
 import { GetMovieMovie } from "../../../../../__types__/typeDefs";
-import CashFlow from "./moveDetails/CashFlow";
-import ReleaseDate from "./moveDetails/ReleaseDate";
-import Votes from "./moveDetails/Votes";
+import CashFlow from "./movieDetails/CashFlow";
+import ReleaseDate from "./movieDetails/ReleaseDate";
+import Votes from "./movieDetails/Votes";
 
 interface Props {
   movie: GetMovieMovie;

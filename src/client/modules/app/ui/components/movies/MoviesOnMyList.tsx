@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Query } from "react-apollo";
+import { Redirect } from "react-router";
 import {
   getMovie,
   getUser
@@ -18,6 +19,9 @@ export default class MoviesOnMyList extends React.Component {
       <Query<GetUserQuery> query={getUser}>
         {({ data, loading }) => {
           if (loading) return <Loading />;
+          if (!data) {
+            return <Redirect to="/login" />;
+          }
           return (
             <>
               <div className="personal-list">

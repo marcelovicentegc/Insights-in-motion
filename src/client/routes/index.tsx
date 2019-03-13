@@ -11,7 +11,6 @@ export const Routes = () => {
   return (
     <BrowserRouter>
       <>
-        {/* <Nav /> */}
         <Switch>
           <Route exact={true} path="/" component={LandingConnector} />
           <Route exact={true} path="/app" component={AppConnector} />

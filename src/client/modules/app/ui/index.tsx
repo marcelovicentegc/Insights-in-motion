@@ -1,7 +1,7 @@
 import * as React from "react";
 import Nav from "../../main/ui/components/shared/Nav";
-import MoviesOnAListWrapper from "./components/free/MoviesOnAListWrapper";
-import SearchBar from "./components/free/SearchBar";
+import MoviesOnAListWrapper from "./components/movies/MoviesOnAListWrapper";
+import SearchBar from "./components/movies/SearchBar";
 import "./main.scss";
 
 export default class AppView extends React.Component {
