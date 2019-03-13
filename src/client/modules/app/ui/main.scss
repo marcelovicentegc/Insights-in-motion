@@ -1,46 +1,155 @@
-@import "../../../utils/global.scss";
+@import "../../../utils/global";
+@import "../../../utils/shared";
 
-.button {
-  padding: 10px 15px;
-  margin: 0px 20px;
-  background-color: #f5f5f5;
-  border: 1px solid #d4d4d4;
-  color: #a8a8a8;
-  transition: 0.2s;
+.movies-list {
+  @include moviesDisplaySetup();
 
-  &:hover {
-    cursor: pointer;
-    background-color: #0087cb;
-    color: #dbffff;
+  ul {
+    @include moviesListStyle();
+
+    li {
+      transition: 0.2s;
+      filter: drop-shadow(0 0 1px #000);
+
+      button {
+        transition: 0.2s;
+        border-radius: 50%;
+        margin-right: 20px;
+        margin-top: -34px;
+        font-size: 14px;
+        font-weight: 600;
+        border: none;
+        z-index: 10;
+        float: right;
+        color: #fff;
+        transition: 0.2s;
+
+        @include hover-supported() {
+          @include buttonOnHoverOrActive();
+        }
+
+        &.add-movie-to-list {
+          background-color: $theButtonGreen;
+          background-image: linear-gradient(-180deg, $theGreen, #28a745 90%);
+          border: 1px solid rgba(27, 31, 35, 0.2);
+          padding: 8px 10px;
+
+          @include hover-supported() {
+            background-image: linear-gradient(-180deg, $theGreen, #269f42 90%);
+            background-position: -0.5em;
+            border-color: rgba(27, 31, 35, 0.5);
+          }
+        }
+
+        &.remove-movie-from-list {
+          background-color: #bd3535;
+          background-image: linear-gradient(-180deg, #bd3535, #a72828 90%);
+          border: 1px solid rgba(27, 31, 35, 0.2);
+          padding: 8px 12px;
+
+          @include hover-supported() {
+            background-image: linear-gradient(-180deg, #bd3535, #8b2222 90%);
+            background-position: -0.5em;
+            border-color: rgba(27, 31, 35, 0.5);
+          }
+        }
+
+        @include respond-to(medium-handhelds) {
+          padding: 6px;
+          margin-top: -28px;
+        }
+      }
+
+      h4 {
+        margin-block-start: 0;
+        margin-block-end: 0;
+        transition: 0.2s;
+        margin-right: 80px;
+        @include respond-to(medium-handhelds) {
+          filter: none;
+          font-size: 80%;
+        }
+
+        @include hover-supported() {
+          @include movieItemOnHoverOrActive();
+        }
+
+        &:active {
+          @include movieItemOnHoverOrActive();
+        }
+      }
+    }
   }
 }
 
-.search-movies {
-  display: grid;
-  justify-content: center;
-  align-content: center;
-  padding: 20px 0px 30px 0px;
+.movie-details {
+  @include moviesDisplaySetup();
 
-  .input-wrapper {
-    width: 75vw;
-    background: linear-gradient(to right, #d201a5, #081c24);
-    border-radius: 15px;
-    padding: 1px;
+  .movie-detail {
+    padding: 0 40px 1em 40px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+    text-align: justify;
+
+    &.movie-title {
+      padding-bottom: 0;
+    }
+
+    &.movie-budget {
+      border-bottom: none;
+    }
+
+    p {
+      &.movie-genre {
+        margin-block-start: 0;
+        margin-block-end: 0;
+        display: inline-block;
+        padding: 3px 5px;
+
+        span {
+          padding: 3px 5px;
+          background: #000;
+          border-radius: 3.5px;
+          color: #fff;
+        }
+      }
+      span {
+        justify-content: center;
+        font-size: 60%;
+
+        b {
+          font-weight: 900;
+        }
+      }
+    }
   }
+}
 
-  input {
-    font-family: "Roboto", sans-serif;
-    font-size: 60%;
-    width: 70vw;
-    border-radius: 15px;
-    box-shadow: inset 0 1px 2px rgba(27, 31, 35, 0.075);
-    border: none;
-    outline: none;
-    padding: 12px 2.5vw;
-    transition: 0.2s;
+.button-wrapper {
+  button {
+    &.return {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      margin: 50px;
+      border-radius: 15px;
+      outline: none;
+      border: none;
+      background: transparent;
 
-    &::selection {
-      color: $theGreen;
+      span {
+        display: block;
+        transition: 0.2s;
+        font-size: 250%;
+        filter: drop-shadow(0 0 1px #000);
+
+        @include hover-supported() {
+          @include buttonOnHoverOrActive();
+        }
+
+        &:active {
+          @include buttonOnHoverOrActive();
+        }
+      }
     }
   }
 }

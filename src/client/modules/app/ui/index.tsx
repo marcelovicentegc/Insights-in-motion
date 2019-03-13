@@ -1,14 +1,16 @@
 import * as React from "react";
-import LandingPage from "./components/main/LandingPage";
-import Nav from "./components/shared/Nav";
+import Nav from "../../main/ui/components/shared/Nav";
+import MoviesOnAListWrapper from "./components/free/MoviesOnAListWrapper";
+import SearchBar from "./components/free/SearchBar";
 import "./main.scss";
 
-export default class LandingView extends React.Component {
+export default class AppView extends React.Component {
   render() {
     return (
       <>
         <Nav />
-        <LandingPage />
+        <SearchBar />
+        <MoviesOnAListWrapper />
       </>
     );
   }

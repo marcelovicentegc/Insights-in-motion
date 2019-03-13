@@ -1,12 +1,14 @@
 import * as React from "react";
 import { RouteComponentProps, withRouter } from "react-router";
 import Logo from "../../../../accounts/ui/components/shared/Logo";
+import Nav from "../shared/Nav";
 import "./main.scss";
 
 class LandingPage extends React.Component<RouteComponentProps<{}>> {
   render() {
     return (
       <>
+        <Nav />
         <div className="landing-wrapper">
           <div className="presentation">
             <p>
@@ -14,14 +16,13 @@ class LandingPage extends React.Component<RouteComponentProps<{}>> {
               bar and automagically get it!
             </p>
             <p>
-              When you join us, you get extra features: you then can create your
-              own list with a bunch of movies that you like, and get exclusive
-              movie details.
+              When you join us, you get exclusive movie details and you can
+              create your own list with a bunch of movies that you like.
             </p>
           </div>
           <div className="go-to-app">
             <p>Take me to the app!</p>
-            <Logo to="/app" title="InsightInMotion app" />
+            <Logo to="/app" title="InsightInMotion app" icon="🎬" />
           </div>
         </div>
         <div className="floating-posters" />

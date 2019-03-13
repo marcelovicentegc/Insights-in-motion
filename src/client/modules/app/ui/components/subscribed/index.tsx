@@ -1,5 +1,5 @@
 import * as React from "react";
-import Nav from "../shared/Nav";
+import Nav from "../../../../main/ui/components/shared/Nav";
 import "./main.scss";
 import MoviesOnMyList from "./MoviesOnMyList";
 

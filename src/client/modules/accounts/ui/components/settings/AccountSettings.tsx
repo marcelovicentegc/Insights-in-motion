@@ -5,13 +5,14 @@ import { Link } from "react-router-dom";
 import { getUser } from "../../../../../../server/schema/graphql/Queries.graphql";
 import { GetUserQuery } from "../../../../../__types__/typeDefs";
 import Loading from "../../../../app/ui/components/messages/Loading";
-import Nav from "../../../../app/ui/components/shared/Nav";
+import Nav from "../../../../main/ui/components/shared/Nav";
 import EditAccount from "./EditAccount";
 
 export default class AccountSettings extends React.Component {
   render() {
     return (
       <>
+        <Nav />
         <Query<GetUserQuery> query={getUser}>
           {({ data, loading }) => {
             if (loading) return <Loading />;
@@ -20,7 +21,6 @@ export default class AccountSettings extends React.Component {
             }
             return (
               <>
-                <Nav />
                 <div className="list-wrapper">
                   <Link
                     to="/list"

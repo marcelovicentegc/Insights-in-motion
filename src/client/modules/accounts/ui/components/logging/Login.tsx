@@ -2,19 +2,25 @@ import * as React from "react";
 import { Mutation } from "react-apollo";
 import { Link, RouteComponentProps, withRouter } from "react-router-dom";
 import { loginUser } from "../../../../../../server/schema/graphql/Mutations.graphql";
+import { AccountsStore } from "../../../../../stores/Accounts.store";
 import {
   LoginUserMutation,
   LoginUserVariables
 } from "../../../../../__types__/typeDefs";
+import Nav from "../../../../main/ui/components/shared/Nav";
 import Logo from "../shared/Logo";
+
+interface Props extends RouteComponentProps {
+  accountsStore?: AccountsStore;
+}
 
 interface State {
   email: string;
   password: string;
 }
 
-class Login extends React.Component<RouteComponentProps<{}>, State> {
-  constructor(props: RouteComponentProps) {
+class Login extends React.Component<Props, State> {
+  constructor(props: Props) {
     super(props);
 
     this.state = {
@@ -26,7 +32,8 @@ class Login extends React.Component<RouteComponentProps<{}>, State> {
   render() {
     return (
       <>
-        <Logo to="/" title="Go to the landing page" />
+        <Nav />
+        <Logo to="/" title="Go to the landing page" icon="🎥" />
         <Mutation<LoginUserMutation, LoginUserVariables> mutation={loginUser}>
           {mutate => (
             <div className="form-wrapper" id="login-form-wrapper ">

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 interface Props {
   to: string;
   title: string;
+  icon: string;
 }
 
 const Logo: React.SFC<Props> = props => {
@@ -11,7 +12,7 @@ const Logo: React.SFC<Props> = props => {
     <>
       <div className="logo-wrapper">
         <Link to={props.to} title={props.title}>
-          🎥
+          {props.icon}
         </Link>
       </div>
     </>

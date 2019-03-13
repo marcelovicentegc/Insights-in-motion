@@ -6,6 +6,7 @@ import {
   CreateUserMutation,
   CreateUserVariables
 } from "../../../../../__types__/typeDefs";
+import Nav from "../../../../main/ui/components/shared/Nav";
 import "../../main.scss";
 import Logo from "../shared/Logo";
 
@@ -29,7 +30,8 @@ class Register extends React.Component<RouteComponentProps<{}>, State> {
   render() {
     return (
       <>
-        <Logo to="/" title="Go to the landing page" />
+        <Nav />
+        <Logo to="/" title="Go to the landing page" icon="🎥" />
         <Mutation<CreateUserMutation, CreateUserVariables>
           mutation={createUser}
         >
