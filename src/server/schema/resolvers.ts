@@ -2,31 +2,13 @@ import * as bcrypt from "bcrypt";
 import { IResolvers } from "graphql-tools";
 import fetch from "node-fetch";
 import { getConnection } from "typeorm";
-import * as yup from "yup";
 import { Movies, User } from "../database/entities/index";
 import {
   duplicate,
   invalidEmail,
-  notLongEnough,
-  passwordNotLongEnough
+  passwordNotLongEnough,
+  usernameNotLongEnough
 } from "../utils/errorMessages";
-import { formatYupError } from "../utils/formatYupErrors";
-
-const schema = yup.object().shape({
-  email: yup
-    .string()
-    .min(3, notLongEnough)
-    .max(255)
-    .email(invalidEmail),
-  username: yup
-    .string()
-    .min(3, notLongEnough)
-    .max(50),
-  password: yup
-    .string()
-    .min(3, passwordNotLongEnough)
-    .max(30)
-});
 
 const TMDB_API_URL = "https://api.themoviedb.org/3";
 const resolvers: IResolvers = {
@@ -69,37 +51,40 @@ const resolvers: IResolvers = {
   },
   Mutation: {
     createUser: async (_, { email, username, password }, { req }) => {
-      try {
-        await schema.validate(
-          { email, username, password },
-          { abortEarly: false }
-        );
-      } catch (error) {
-        return formatYupError(error);
-      }
       const emailAlreadyExists = await User.findOne({
         where: { email },
         select: ["id"]
       });
       if (emailAlreadyExists) {
-        return [
-          {
-            path: "email",
-            message: duplicate
-          }
-        ];
+        throw new Error("Email " + duplicate);
       }
       const usernameAlreadyExists = await User.findOne({
         where: { username },
         select: ["id"]
       });
       if (usernameAlreadyExists) {
-        return [
-          {
-            path: "username",
-            message: duplicate
-          }
-        ];
+        throw new Error("Username " + duplicate);
+      }
+      const validEmail = (email: string) => {
+        var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
+      };
+      if (!validEmail(email)) {
+        throw new Error(invalidEmail);
+      }
+      const validUsername = (username: string) => {
+        if (username.length >= 3) return true;
+        else return false;
+      };
+      if (!validUsername(username)) {
+        throw new Error(usernameNotLongEnough);
+      }
+      const validPassword = (password: string) => {
+        if (password.length >= 8) return true;
+        else return false;
+      };
+      if (!validPassword(password)) {
+        throw new Error(passwordNotLongEnough);
       }
 
       const hashedPassword = await bcrypt.hash(password, 12);
@@ -140,7 +125,7 @@ const resolvers: IResolvers = {
         where: { email }
       });
       if (!user) {
-        throw new Error("Such user doesn't exists.");
+        throw new Error("This user doesn't exist.");
       }
 
       const valid = await bcrypt.compare(password, user.password);

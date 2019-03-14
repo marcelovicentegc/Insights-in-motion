@@ -5,6 +5,7 @@
   "username": "postgres",
   "password": "postgres",
   "database": "test_db",
+  "dropSchema": true,
   "synchronize": true,
   "logging": false,
   "entities": ["src/server/database/**/*.model.ts"],

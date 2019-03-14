@@ -16,7 +16,8 @@ A web app that consumes the [TMDb](https://www.themoviedb.org/ "TMDb's homepage"
 
 ## To do
 
-1. [ ] Display registration validation errors to end-user
-2. [ ] Add custom searches
-3. [ ] Fetch images from trending movies for landing page
-4. [ ] Add movies' stats
+1. [ ] Display registration validation errors to end-user (in progress...)
+2. [ ] Format errors
+3. [ ] Add custom searches
+4. [ ] Fetch images from trending movies for landing page
+5. [ ] Add movies' stats
