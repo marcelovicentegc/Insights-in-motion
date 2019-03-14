@@ -4,6 +4,7 @@ import { Query } from "react-apollo";
 import { Redirect } from "react-router";
 import { Link } from "react-router-dom";
 import { getUser } from "../../../../../../server/schema/graphql/Queries.graphql";
+import { AccountsStore } from "../../../../../stores/Accounts.store";
 import { MoviesStore } from "../../../../../stores/Movies.store";
 import { GetUserQuery } from "../../../../../__types__/typeDefs";
 import Loading from "../../../../app/ui/components/messages/Loading";
@@ -12,19 +13,25 @@ import EditAccount from "./EditAccount";
 
 interface Props {
   moviesStore?: MoviesStore;
+  accountsStore?: AccountsStore;
 }
 
-@inject("moviesStore")
+@inject("moviesStore", "accountsStore")
 @observer
 export default class AccountSettings extends React.Component<Props> {
   resetQuery = () => {
     this.props.moviesStore.resetQuery();
   };
 
+  resetCredentials = () => {
+    this.props.accountsStore.resetCredentials();
+  };
+
   render() {
     return (
       <>
         {this.resetQuery()}
+        {this.resetCredentials()}
         <Nav />
         <Query<GetUserQuery> query={getUser}>
           {({ data, loading }) => {

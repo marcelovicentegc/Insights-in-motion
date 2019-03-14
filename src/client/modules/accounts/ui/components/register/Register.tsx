@@ -3,130 +3,100 @@ import * as React from "react";
 import { Mutation } from "react-apollo";
 import { Link, RouteComponentProps, withRouter } from "react-router-dom";
 import { createUser } from "../../../../../../server/schema/graphql/Mutations.graphql";
+import { AccountsStore } from "../../../../../stores/Accounts.store";
 import { MoviesStore } from "../../../../../stores/Movies.store";
 import {
   CreateUserMutation,
   CreateUserVariables
 } from "../../../../../__types__/typeDefs";
 import Error from "../shared/Error";
+import InputField from "../shared/InputField";
 import Logo from "../shared/Logo";
 import "../shared/main.scss";
 
 interface Props extends RouteComponentProps {
   moviesStore?: MoviesStore;
-}
-
-interface State {
-  email: string;
-  username: string;
-  password: string;
-  error: string;
+  accountsStore?: AccountsStore;
 }
 
 @inject("moviesStore", "accountsStore")
 @observer
-class Register extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-
-    this.state = {
-      email: "",
-      username: "",
-      password: "",
-      error: undefined
-    };
-  }
-
+class Register extends React.Component<Props> {
   resetQuery = () => {
     this.props.moviesStore.resetQuery();
   };
 
-  private success = (errorMessage: string) => {
-    if (!errorMessage) {
-      return true;
-    } else {
-      return false;
-    }
+  private success = () => {
+    return this.props.accountsStore.success();
   };
 
   render() {
+    this.props.accountsStore.errorMessage;
+    this.props.accountsStore.email;
+    this.props.accountsStore.username;
+    this.props.accountsStore.password;
     return (
       <>
         {this.resetQuery()}
         <Logo to="/" title="Go to the landing page" icon="🎥" />
         <Mutation<CreateUserMutation, CreateUserVariables>
           mutation={createUser}
-          onError={error => this.setState({ error: error.message })}
+          onError={error =>
+            (this.props.accountsStore.errorMessage = error.message)
+          }
         >
           {mutate => (
             <>
               <div className="form-wrapper" id="join-us-form-wrapper">
-                {this.state.error !== undefined ? (
-                  this.state.email.length === 0 &&
-                  this.state.password.length === 0 &&
-                  this.state.username.length === 0 ? (
+                {this.props.accountsStore.errorMessage !== undefined ? (
+                  this.props.accountsStore.email.length === 0 &&
+                  this.props.accountsStore.password.length === 0 &&
+                  this.props.accountsStore.username.length === 0 ? (
                     <Error message="Please provide your credentials" />
-                  ) : this.state.email.length === 0 &&
-                    this.state.username.length === 0 ? (
+                  ) : this.props.accountsStore.email.length === 0 &&
+                    this.props.accountsStore.username.length === 0 ? (
                     <Error message="Please provide an email and a username" />
-                  ) : this.state.email.length === 0 &&
-                    this.state.password.length === 0 ? (
+                  ) : this.props.accountsStore.email.length === 0 &&
+                    this.props.accountsStore.password.length === 0 ? (
                     <Error message="Please provide an email and a password" />
-                  ) : this.state.username.length === 0 &&
-                    this.state.password.length === 0 ? (
+                  ) : this.props.accountsStore.username.length === 0 &&
+                    this.props.accountsStore.password.length === 0 ? (
                     <Error message="Please provide a username and a password" />
-                  ) : this.state.email.length === 0 ? (
+                  ) : this.props.accountsStore.email.length === 0 ? (
                     <Error message="Please provide an email" />
-                  ) : this.state.username.length === 0 ? (
+                  ) : this.props.accountsStore.username.length === 0 ? (
                     <Error message="Please provide a username" />
-                  ) : this.state.password.length === 0 ? (
+                  ) : this.props.accountsStore.password.length === 0 ? (
                     <Error message="Please provide a password" />
                   ) : (
                     <>
-                      <Error message={this.state.error.slice(15, 100)} />
+                      <Error
+                        message={this.props.accountsStore.errorMessage.slice(
+                          15,
+                          100
+                        )}
+                      />
                     </>
                   )
                 ) : null}
                 <div className="form" id="join-us-form">
-                  <label>Email adress</label>
-                  <input
-                    type="text"
-                    onChange={e =>
-                      this.setState({ email: e.target.value, error: undefined })
-                    }
-                  />
-                  <label>Username</label>
-                  <input
-                    type="text"
-                    onChange={e =>
-                      this.setState({
-                        username: e.target.value,
-                        error: undefined
-                      })
-                    }
-                  />
-                  <label>Password</label>
-                  <input
+                  <InputField label="Email address" type="text" name="email" />
+                  <InputField label="Username" type="text" name="username" />
+                  <InputField
+                    label="Password"
                     type="password"
-                    onChange={e =>
-                      this.setState({
-                        password: e.target.value,
-                        error: undefined
-                      })
-                    }
+                    name="password"
                   />
                   <button
                     onClick={async () => {
                       await mutate({
                         variables: {
-                          email: this.state.email,
-                          username: this.state.username,
-                          password: this.state.password
+                          email: this.props.accountsStore.email,
+                          username: this.props.accountsStore.username,
+                          password: this.props.accountsStore.password
                         }
                       });
-                      this.success(this.state.error)
-                        ? this.props.history.push("/")
-                        : null;
+                      this.success() ? this.props.history.push("/") : null;
                     }}
                   >
                     Create an account
