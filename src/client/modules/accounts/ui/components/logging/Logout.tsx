@@ -3,18 +3,24 @@ import * as React from "react";
 import { Mutation } from "react-apollo";
 import { RouteComponentProps, withRouter } from "react-router";
 import { logoutUser } from "../../../../../../server/schema/graphql/Mutations.graphql";
+import { AccountsStore } from "../../../../../stores/Accounts.store";
 import { MoviesStore } from "../../../../../stores/Movies.store";
 import { LogoutUserMutation } from "../../../../../__types__/typeDefs";
 
 interface Props extends RouteComponentProps {
   moviesStore?: MoviesStore;
+  accountsStore?: AccountsStore;
 }
 
-@inject("moviesStore")
+@inject("moviesStore", "accountsStore")
 @observer
 class LogOut extends React.Component<Props> {
   resetQuery = () => {
     this.props.moviesStore.resetQuery();
+  };
+
+  resetCredentials = () => {
+    this.props.accountsStore.resetCredentials();
   };
 
   render() {
@@ -27,6 +33,7 @@ class LogOut extends React.Component<Props> {
               onClick={async () => {
                 await mutate();
                 await client.resetStore();
+                this.props.accountsStore.resetCredentials();
                 this.props.history.push("/");
               }}
             >

@@ -9,6 +9,7 @@ import {
   passwordNotLongEnough,
   usernameNotLongEnough
 } from "../utils/errorMessages";
+import { validEmail, validPassword, validUsername } from "../utils/errors";
 
 const TMDB_API_URL = "https://api.themoviedb.org/3";
 const resolvers: IResolvers = {
@@ -65,24 +66,12 @@ const resolvers: IResolvers = {
       if (usernameAlreadyExists) {
         throw new Error("Username " + duplicate);
       }
-      const validEmail = (email: string) => {
-        var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(email);
-      };
       if (!validEmail(email)) {
         throw new Error(invalidEmail);
       }
-      const validUsername = (username: string) => {
-        if (username.length >= 3) return true;
-        else return false;
-      };
       if (!validUsername(username)) {
         throw new Error(usernameNotLongEnough);
       }
-      const validPassword = (password: string) => {
-        if (password.length >= 8) return true;
-        else return false;
-      };
       if (!validPassword(password)) {
         throw new Error(passwordNotLongEnough);
       }

@@ -1,6 +1,7 @@
 import { inject, observer } from "mobx-react";
 import * as React from "react";
 import { RouteComponentProps, withRouter } from "react-router";
+import { AccountsStore } from "../../../../../stores/Accounts.store";
 import { MoviesStore } from "../../../../../stores/Movies.store";
 import Logo from "../../../../accounts/ui/components/shared/Logo";
 import Nav from "../shared/Nav";
@@ -8,18 +9,24 @@ import "./main.scss";
 
 interface Props extends RouteComponentProps {
   moviesStore?: MoviesStore;
+  accountsStore?: AccountsStore;
 }
 
-@inject("moviesStore")
+@inject("moviesStore", "accountsStore")
 @observer
 class LandingView extends React.Component<Props> {
   resetQuery = () => {
     this.props.moviesStore.resetQuery();
   };
 
+  private resetCredentials = () => {
+    this.props.accountsStore.resetCredentials();
+  };
+
   render() {
     return (
       <>
+        {this.resetCredentials()}
         {this.resetQuery()}
         <Nav />
         <div className="landing-wrapper">

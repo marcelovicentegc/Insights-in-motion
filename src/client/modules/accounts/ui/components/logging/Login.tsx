@@ -5,10 +5,7 @@ import { Link, RouteComponentProps, withRouter } from "react-router-dom";
 import { loginUser } from "../../../../../../server/schema/graphql/Mutations.graphql";
 import { AccountsStore } from "../../../../../stores/Accounts.store";
 import { MoviesStore } from "../../../../../stores/Movies.store";
-import {
-  LoginUserMutation,
-  LoginUserVariables
-} from "../../../../../__types__/typeDefs";
+import { LoginUserMutation, LoginUserVariables } from "../../../../../__types__/typeDefs";
 import Error from "../shared/Error";
 import InputField from "../shared/InputField";
 import Logo from "../shared/Logo";
@@ -23,6 +20,10 @@ interface Props extends RouteComponentProps {
 class Login extends React.Component<Props> {
   resetQuery = () => {
     this.props.moviesStore.resetQuery();
+  };
+
+  private resetCredentials = () => {
+    this.props.accountsStore.resetCredentials();
   };
 
   private success = () => {
@@ -86,7 +87,10 @@ class Login extends React.Component<Props> {
                 </div>
                 <div className="form" id="form-callout">
                   <label>
-                    Don't have an account? <Link to="/join">Create one.</Link>
+                    Don't have an account?{" "}
+                    <Link to="/join" onClick={() => this.resetCredentials()}>
+                      Create one.
+                    </Link>
                   </label>
                 </div>
               </div>

@@ -23,15 +23,10 @@ export default class AccountSettings extends React.Component<Props> {
     this.props.moviesStore.resetQuery();
   };
 
-  resetCredentials = () => {
-    this.props.accountsStore.resetCredentials();
-  };
-
   render() {
     return (
       <>
         {this.resetQuery()}
-        {this.resetCredentials()}
         <Nav />
         <Query<GetUserQuery> query={getUser}>
           {({ data, loading }) => {

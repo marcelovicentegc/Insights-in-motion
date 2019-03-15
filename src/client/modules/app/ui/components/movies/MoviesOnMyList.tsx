@@ -10,8 +10,9 @@ import {
   GetMovieVariables,
   GetUserQuery
 } from "../../../../../__types__/typeDefs";
+import Logo from "../../../../accounts/ui/components/shared/Logo";
 import Loading from "../messages/Loading";
-import NoData from "../messages/NoData";
+import Message from "../messages/Message";
 
 export default class MoviesOnMyList extends React.Component {
   render() {
@@ -28,9 +29,12 @@ export default class MoviesOnMyList extends React.Component {
                 <p className="title">{data.user.username}'s list</p>
                 <div className="movies-list">
                   {data.user.movies.length === 0 ? (
-                    <div className="no-data-wrapper">
-                      <NoData />
-                    </div>
+                    <>
+                      <div className="no-data-wrapper">
+                        <Message message="Why not add movies to your list?" />
+                        <Logo to="/app" title="Go to the app" icon="🎬" />
+                      </div>
+                    </>
                   ) : (
                     data.user.movies.map((movie, i) => {
                       return (

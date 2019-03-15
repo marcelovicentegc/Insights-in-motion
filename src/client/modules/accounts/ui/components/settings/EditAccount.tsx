@@ -16,15 +16,27 @@ interface State {
   email: string;
   username: string;
   password: string;
+  errorMessage: string;
 }
 
 export default class EditAccount extends React.Component<Props, State> {
-  emailInput = React.createRef<HTMLInputElement>();
-  usernameInput = React.createRef<HTMLInputElement>();
-  passwordInput = React.createRef<HTMLInputElement>();
-  submitButton = React.createRef<HTMLInputElement>();
+  constructor(props: Props) {
+    super(props);
 
-  displayInput = (input: React.RefObject<HTMLInputElement>) => {
+    this.state = {
+      email: "",
+      username: "",
+      password: "",
+      errorMessage: undefined
+    };
+  }
+
+  private emailInput = React.createRef<HTMLInputElement>();
+  private usernameInput = React.createRef<HTMLInputElement>();
+  private passwordInput = React.createRef<HTMLInputElement>();
+  private submitButton = React.createRef<HTMLInputElement>();
+
+  private displayInput = (input: React.RefObject<HTMLInputElement>) => {
     let submitButtonStyle = this.submitButton.current.style;
     let inputStyle = input.current.style;
     inputStyle.padding === "0px"
@@ -65,6 +77,14 @@ export default class EditAccount extends React.Component<Props, State> {
         (submitButtonStyle.border = "1px solid rgba(27, 31, 35, 0.2)"));
   };
 
+  success = (errorMessage: string) => {
+    if (errorMessage.length !== 0) {
+      return false;
+    } else {
+      return true;
+    }
+  };
+
   render() {
     return (
       <Mutation<UpdateUserMutation, UpdateUserVariables>
@@ -76,9 +96,11 @@ export default class EditAccount extends React.Component<Props, State> {
           password: this.props.user.password
         }}
         refetchQueries={[{ query: getUser }]}
+        onError={error => this.setState({ errorMessage: error.message })}
       >
         {mutate => (
           <div className="form-wrapper" id="edit-wrapper">
+            {/* errors */}
             <div className="form" id="edit">
               <label onClick={e => this.displayInput(this.emailInput)}>
                 Email adress
@@ -134,7 +156,9 @@ export default class EditAccount extends React.Component<Props, State> {
                       password: this.state.password || this.props.user.password
                     }
                   });
-                  window.location.reload();
+                  this.success(this.state.errorMessage)
+                    ? window.location.reload()
+                    : null;
                 }}
               >
                 Update info

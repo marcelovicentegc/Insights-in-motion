@@ -21,6 +21,10 @@
       display: grid;
       height: calc(100% - 10vh);
       align-content: center;
+
+      .logo-wrapper {
+        margin-top: 0;
+      }
     }
 
     @include moviesDisplaySetup();

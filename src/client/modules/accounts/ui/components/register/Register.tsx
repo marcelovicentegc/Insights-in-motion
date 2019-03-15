@@ -26,6 +26,10 @@ class Register extends React.Component<Props> {
     this.props.moviesStore.resetQuery();
   };
 
+  private resetCredentials = () => {
+    this.props.accountsStore.resetCredentials();
+  };
+
   private success = () => {
     return this.props.accountsStore.success();
   };
@@ -104,7 +108,10 @@ class Register extends React.Component<Props> {
                 </div>
                 <div className="form" id="form-callout">
                   <label>
-                    Already have an account? <Link to="/login">Sign in.</Link>
+                    Already have an account?{" "}
+                    <Link to="/login" onClick={() => this.resetCredentials()}>
+                      Sign in.
+                    </Link>
                   </label>
                 </div>
               </div>
