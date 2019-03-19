@@ -2,7 +2,7 @@ import * as React from "react";
 import {
   GetMoviesMovies,
   GetUserUser
-} from "../../../../../__types__/typeDefs";
+} from "../../../../../../__types__/typeDefs";
 import AddMovieToListBtn from "./AddMovieToListBtn";
 import RemoveMovieFromListBtn from "./RemoveMovieFromListBtn";
 

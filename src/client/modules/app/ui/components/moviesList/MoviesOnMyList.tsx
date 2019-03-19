@@ -11,8 +11,7 @@ import {
   GetUserQuery
 } from "../../../../../__types__/typeDefs";
 import Logo from "../../../../accounts/ui/components/shared/Logo";
-import Loading from "../messages/Loading";
-import Message from "../messages/Message";
+import { Loading, Message } from "../messages/index";
 
 export default class MoviesOnMyList extends React.Component {
   render() {

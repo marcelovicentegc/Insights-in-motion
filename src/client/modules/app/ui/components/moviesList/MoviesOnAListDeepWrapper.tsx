@@ -2,7 +2,7 @@ import * as React from "react";
 import { Query } from "react-apollo";
 import { getUser } from "../../../../../../server/schema/graphql/Queries.graphql";
 import { GetUserQuery } from "../../../../../__types__/typeDefs";
-import MoviesOnAListShallowWrapper from "./MoviesOnAListShallowWrapper";
+import MoviesOnAListMiddleWrapper from "./MoviesOnAListMiddleWrapper";
 
 export default class MoviesOnAListDeepWrapper extends React.Component {
   render() {
@@ -12,14 +12,14 @@ export default class MoviesOnAListDeepWrapper extends React.Component {
           if (loading) return null;
           if (!data) {
             return (
-              <MoviesOnAListShallowWrapper
+              <MoviesOnAListMiddleWrapper
                 withALoggedInUser={false}
                 user={null}
               />
             );
           }
           return (
-            <MoviesOnAListShallowWrapper
+            <MoviesOnAListMiddleWrapper
               withALoggedInUser={true}
               user={data.user}
             />

@@ -5,9 +5,7 @@ import {
   GetMovieQuery,
   GetMovieVariables
 } from "../../../../../__types__/typeDefs";
-import Loading from "../messages/Loading";
-import NoData from "../messages/NoData";
-import TypeInYourFavoriteMovie from "../messages/TypeIn";
+import { Loading, NoData, TypeInYourFavoriteMovie } from "../messages/index";
 import MovieDetail from "./MovieDetail";
 
 interface Props {

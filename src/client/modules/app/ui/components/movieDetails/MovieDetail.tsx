@@ -2,10 +2,10 @@ import { inject, observer } from "mobx-react";
 import * as React from "react";
 import { MoviesStore } from "../../../../../stores/Movies.store";
 import { GetMovieMovie } from "../../../../../__types__/typeDefs";
+import { ReturnButton, Tagline } from "./details/index";
 import ExtraMovieDetail from "./ExtraMovieDetails";
 import FreeMovieDetail from "./FreeMovieDetails";
-import ReturnButton from "./movieDetails/ReturnButton";
-import Tagline from "./movieDetails/Tagline";
+import "./main.scss";
 
 interface Props {
   movie: GetMovieMovie;

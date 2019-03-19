@@ -1,13 +1,13 @@
 import * as React from "react";
 import { Mutation } from "react-apollo";
-import { appendMovie } from "../../../../../../server/schema/graphql/Mutations.graphql";
-import { getUser } from "../../../../../../server/schema/graphql/Queries.graphql";
+import { appendMovie } from "../../../../../../../server/schema/graphql/Mutations.graphql";
+import { getUser } from "../../../../../../../server/schema/graphql/Queries.graphql";
 import {
   AppendMovieMutation,
   AppendMovieVariables,
   GetMoviesMovies,
   GetUserUser
-} from "../../../../../__types__/typeDefs";
+} from "../../../../../../__types__/typeDefs";
 
 interface Props {
   movie: GetMoviesMovies;

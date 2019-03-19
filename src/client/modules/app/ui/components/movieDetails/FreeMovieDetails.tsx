@@ -1,8 +1,6 @@
 import * as React from "react";
 import { GetMovieMovie } from "../../../../../__types__/typeDefs";
-import Genres from "./movieDetails/Genres";
-import Overview from "./movieDetails/Overview";
-import Title from "./movieDetails/Title";
+import { Genres, Overview, Title } from "./details/index";
 
 interface Props {
   movie: GetMovieMovie;

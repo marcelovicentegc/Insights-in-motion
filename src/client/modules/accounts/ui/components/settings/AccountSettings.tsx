@@ -7,7 +7,7 @@ import { getUser } from "../../../../../../server/schema/graphql/Queries.graphql
 import { AccountsStore } from "../../../../../stores/Accounts.store";
 import { MoviesStore } from "../../../../../stores/Movies.store";
 import { GetUserQuery } from "../../../../../__types__/typeDefs";
-import Loading from "../../../../app/ui/components/messages/Loading";
+import { Loading } from "../../../../app/ui/components/messages/index";
 import Nav from "../../../../main/ui/components/shared/Nav";
 import EditAccount from "./EditAccount";
 

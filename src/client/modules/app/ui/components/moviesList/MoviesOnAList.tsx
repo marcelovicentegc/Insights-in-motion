@@ -3,13 +3,13 @@ import * as React from "react";
 import { MoviesStore } from "../../../../../stores/Movies.store";
 import { GetMoviesQuery, GetUserUser } from "../../../../../__types__/typeDefs";
 import NumberOfResults from "../messages/NumberOfResults";
-import AddOrRemoveMovieWrapper from "./AddOrRemoveMovieWrapper";
+import AddOrRemoveMovieWrapper from "../movieDetails/buttons/AddOrRemoveMovieWrapper";
 
 interface Props {
   moviesStore?: MoviesStore;
   data: GetMoviesQuery;
   user: GetUserUser;
-  userMovies?: Array<number>;
+  userMovies?: Array<number> | null;
   withALoggedInUser: boolean;
 }
 

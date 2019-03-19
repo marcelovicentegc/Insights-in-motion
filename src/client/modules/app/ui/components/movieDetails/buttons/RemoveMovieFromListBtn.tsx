@@ -1,12 +1,12 @@
 import * as React from "react";
 import { Mutation } from "react-apollo";
-import { dettachMovie } from "../../../../../../server/schema/graphql/Mutations.graphql";
-import { getUser } from "../../../../../../server/schema/graphql/Queries.graphql";
+import { dettachMovie } from "../../../../../../../server/schema/graphql/Mutations.graphql";
+import { getUser } from "../../../../../../../server/schema/graphql/Queries.graphql";
 import {
   DettachMovieMutation,
   DettachMovieVariables,
   GetMoviesMovies
-} from "../../../../../__types__/typeDefs";
+} from "../../../../../../__types__/typeDefs";
 
 interface Props {
   movie: GetMoviesMovies;
