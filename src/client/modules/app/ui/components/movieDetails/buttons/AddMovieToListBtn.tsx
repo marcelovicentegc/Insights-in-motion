@@ -22,20 +22,22 @@ const AddMovieToListBtn: React.FC<Props> = props => {
       awaitRefetchQueries={true}
     >
       {mutate => (
-        <button
-          className="add-movie-to-list"
-          title="Click to add this movie to your list"
-          onClick={async () => {
-            await mutate({
-              variables: {
-                movieId: props.movie.id,
-                userId: props.user.id
-              }
-            });
-          }}
-        >
-          +
-        </button>
+        <div className="button-wrapper">
+          <button
+            className="add-movie-to-list selector-button"
+            title="Click to add this movie to your list"
+            onClick={async () => {
+              await mutate({
+                variables: {
+                  movieId: props.movie.id,
+                  userId: props.user.id
+                }
+              });
+            }}
+          >
+            +
+          </button>
+        </div>
       )}
     </Mutation>
   );

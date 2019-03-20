@@ -20,19 +20,21 @@ const RemoveMovieFromListBtn: React.FC<Props> = props => {
       awaitRefetchQueries={true}
     >
       {mutate => (
-        <button
-          className="remove-movie-from-list"
-          title="Click to remove this movie from your list"
-          onClick={async () => {
-            await mutate({
-              variables: {
-                movieId: props.movie.id
-              }
-            });
-          }}
-        >
-          -
-        </button>
+        <div className="button-wrapper">
+          <button
+            className="remove-movie-from-list selector-button"
+            title="Click to remove this movie from your list"
+            onClick={async () => {
+              await mutate({
+                variables: {
+                  movieId: props.movie.id
+                }
+              });
+            }}
+          >
+            -
+          </button>
+        </div>
       )}
     </Mutation>
   );
