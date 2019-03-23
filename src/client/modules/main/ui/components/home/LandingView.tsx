@@ -39,6 +39,11 @@ class LandingView extends React.Component<Props> {
               When you join us, you get exclusive movie details and you can
               create your own list with a bunch of films that you like.
             </p>
+            <p>
+              You can ask yourself questions like:
+              <i> what kind of movie genre have I watched the most?</i> and be
+              sure we'll help you with that boring counting!
+            </p>
           </div>
           <div className="go-to-app">
             <p>Take me to the app!</p>

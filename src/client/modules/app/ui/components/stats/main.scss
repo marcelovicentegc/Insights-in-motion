@@ -1,0 +1,14 @@
+.chart-wrapper {
+  height: calc(100% - 120px);
+  position: relative;
+}
+
+.no-data-wrapper {
+  display: grid;
+  height: calc(100% - 90px);
+  align-content: center;
+
+  .logo-wrapper {
+    margin-top: 0;
+  }
+}

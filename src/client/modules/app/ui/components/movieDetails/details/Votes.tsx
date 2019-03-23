@@ -26,7 +26,7 @@ const Votes: React.FC<Props> = props => {
     <div className="movie-votes movie-detail">
       <p>
         <span>
-          {props.vote_count} voters classifed this movie with{" "}
+          {props.vote_count} voters classifed this movie with
           {articleDefiner(props.vote_average)} {props.vote_average} out of 10
         </span>
       </p>

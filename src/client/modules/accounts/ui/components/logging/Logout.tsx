@@ -1,6 +1,6 @@
 import { inject, observer } from "mobx-react";
 import * as React from "react";
-import { Mutation } from "react-apollo";
+import Mutation from "react-apollo/Mutation";
 import { RouteComponentProps, withRouter } from "react-router";
 import { logoutUser } from "../../../../../../server/schema/graphql/Mutations.graphql";
 import { AccountsStore } from "../../../../../stores/Accounts.store";

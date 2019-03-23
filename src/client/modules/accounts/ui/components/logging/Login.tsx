@@ -1,11 +1,14 @@
 import { inject, observer } from "mobx-react";
 import * as React from "react";
-import { Mutation } from "react-apollo";
+import Mutation from "react-apollo/Mutation";
 import { Link, RouteComponentProps, withRouter } from "react-router-dom";
 import { loginUser } from "../../../../../../server/schema/graphql/Mutations.graphql";
 import { AccountsStore } from "../../../../../stores/Accounts.store";
 import { MoviesStore } from "../../../../../stores/Movies.store";
-import { LoginUserMutation, LoginUserVariables } from "../../../../../__types__/typeDefs";
+import {
+  LoginUserMutation,
+  LoginUserVariables
+} from "../../../../../__types__/typeDefs";
 import Error from "../shared/Error";
 import InputField from "../shared/InputField";
 import Logo from "../shared/Logo";

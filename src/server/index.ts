@@ -1,10 +1,12 @@
 import { ApolloEngine } from "apollo-engine";
 import { ApolloServer } from "apollo-server-express";
+import * as bcrypt from "bcrypt";
 import * as bodyParser from "body-parser";
 import * as express from "express";
 import * as session from "express-session";
 import "reflect-metadata";
 import { createConnection } from "typeorm";
+import { User } from "./database/entities";
 import schema from "./schema/schema";
 
 export const startServer = async () => {
@@ -14,6 +16,16 @@ export const startServer = async () => {
       await createConnection().then(connection => {
         console.log("Connected to remote empty database");
       });
+
+      const hashedPassword = await bcrypt.hash("user", 12);
+      const user = User.create({
+        email: "user@example.com",
+        username: "Pierre",
+        password: hashedPassword
+      });
+      await user.save();
+      console.log("Default user created");
+
       break;
     } catch (err) {
       console.log(err);

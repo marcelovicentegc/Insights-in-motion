@@ -3,4 +3,3 @@ dist
 .env
 ormconfig.js
 yarn-error.log
-future.txt

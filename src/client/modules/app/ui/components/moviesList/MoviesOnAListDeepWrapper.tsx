@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Query } from "react-apollo";
+import Query from "react-apollo/Query";
 import { getUser } from "../../../../../../server/schema/graphql/Queries.graphql";
 import { GetUserQuery } from "../../../../../__types__/typeDefs";
 import MoviesOnAListMiddleWrapper from "./MoviesOnAListMiddleWrapper";

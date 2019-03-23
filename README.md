@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/marcelovicentegc/Insights-in-motion.svg?style=flat-square&branch=master)](https://travis-ci.org/marcelovicentegc/Insights-in-motion)
+[![Build Status](https://img.shields.io/travis/marcelovicentegc/Insights-in-motion.svg?branch=master&style=flat-square)](https://travis-ci.org/marcelovicentegc/Insights-in-motion)
 
 # 🎥 Insights in motion
 
@@ -13,6 +13,7 @@ A web app that consumes the [TMDb](https://www.themoviedb.org/ "TMDb's homepage"
 5. Create a Postgres database and set your credentials on a `ormconfig.json`
 6. Install dependencies: `yarn`
 7. Run the application with Apollo Server: `yarn start`; or with Apollo Engine: `yarn start-with-engine`
+8. As the database cleans itself whenever the server restarts for updates, there is a default user which you can log in with, with email: `user@example.com` and password `user`
 
 ## To do
 
@@ -20,4 +21,3 @@ A web app that consumes the [TMDb](https://www.themoviedb.org/ "TMDb's homepage"
 2. [ ] Format errors
 3. [ ] Add custom searches
 4. [ ] Fetch images from trending movies for landing page
-5. [ ] Add movies' stats

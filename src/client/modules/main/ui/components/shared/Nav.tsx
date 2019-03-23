@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Query } from "react-apollo";
+import Query from "react-apollo/Query";
 import { Link } from "react-router-dom";
 import { getUser } from "../../../../../../server/schema/graphql/Queries.graphql";
 import { GetUserQuery } from "../../../../../__types__/typeDefs";

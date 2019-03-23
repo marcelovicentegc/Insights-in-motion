@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Mutation } from "react-apollo";
+import Mutation from "react-apollo/Mutation";
 import { updateUser } from "../../../../../../server/schema/graphql/Mutations.graphql";
 import { getUser } from "../../../../../../server/schema/graphql/Queries.graphql";
 import {

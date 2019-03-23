@@ -1,6 +1,6 @@
 import { inject, observer } from "mobx-react";
 import * as React from "react";
-import { Query } from "react-apollo";
+import Query from "react-apollo/Query";
 import { Redirect } from "react-router";
 import { Link } from "react-router-dom";
 import { getUser } from "../../../../../../server/schema/graphql/Queries.graphql";
@@ -36,16 +36,22 @@ export default class AccountSettings extends React.Component<Props> {
             }
             return (
               <>
-                <div className="list-wrapper">
-                  <Link
-                    to="/list"
-                    title="Visit the movies you added to your list"
-                  >
-                    📝
-                  </Link>
+                <div className="extra-wrapper">
+                  <div className="list-wrapper">
+                    <Link
+                      to="/list"
+                      title="Visit the movies you added to your list"
+                    >
+                      📝
+                    </Link>
+                  </div>
+                  <div className="stats-wrapper">
+                    <Link to="/stats" title="Visit your personal stats">
+                      📈
+                    </Link>
+                  </div>
                 </div>
                 <EditAccount user={data.user} />
-                {/* stats */}
               </>
             );
           }}

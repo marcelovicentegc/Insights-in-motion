@@ -1,12 +1,12 @@
 import * as React from "react";
-import { Query } from "react-apollo";
+import Query from "react-apollo/Query";
 import { getMovie } from "../../../../../../server/schema/graphql/Queries.graphql";
 import {
   GetMovieQuery,
   GetMovieVariables
 } from "../../../../../__types__/typeDefs";
 import { Loading, NoData, TypeInYourFavoriteMovie } from "../messages/index";
-import MovieDetail from "./MovieDetail";
+import MovieDetails from "./MovieDetails";
 
 interface Props {
   movieId: number;
@@ -14,7 +14,7 @@ interface Props {
   withALoggedInUser: boolean;
 }
 
-export default class MovieDetailWrapper extends React.Component<Props> {
+export default class MovieDetailsWrapper extends React.Component<Props> {
   render() {
     return (
       <>
@@ -27,7 +27,7 @@ export default class MovieDetailWrapper extends React.Component<Props> {
             if (!data) return <NoData />;
             if (data.movie === null) return <TypeInYourFavoriteMovie />;
             return (
-              <MovieDetail
+              <MovieDetails
                 movie={data.movie}
                 withALoggedInUser={this.props.withALoggedInUser}
               />

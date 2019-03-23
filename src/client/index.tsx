@@ -5,7 +5,7 @@ import { onError } from "apollo-link-error";
 import { createUploadLink } from "apollo-upload-client";
 import { Provider } from "mobx-react";
 import * as React from "react";
-import { ApolloProvider } from "react-apollo";
+import ApolloProvider from "react-apollo/ApolloProvider";
 import * as ReactDOM from "react-dom";
 import "./main.scss";
 import { Routes } from "./routes/index";

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Query } from "react-apollo";
+import Query from "react-apollo/Query";
 import { Redirect } from "react-router";
 import {
   getMovie,
@@ -10,8 +10,8 @@ import {
   GetMovieVariables,
   GetUserQuery
 } from "../../../../../__types__/typeDefs";
-import Logo from "../../../../accounts/ui/components/shared/Logo";
-import { Loading, Message } from "../messages/index";
+import { Loading } from "../messages/index";
+import WhyNotAddMovies from "../messages/WhyNotAddMovies";
 
 export default class MoviesOnMyList extends React.Component {
   render() {
@@ -28,12 +28,7 @@ export default class MoviesOnMyList extends React.Component {
                 <p className="title">{data.user.username}'s list</p>
                 <div className="movies-list">
                   {data.user.movies.length === 0 ? (
-                    <>
-                      <div className="no-data-wrapper">
-                        <Message message="Why not add movies to your list?" />
-                        <Logo to="/app" title="Go to the app" icon="🎬" />
-                      </div>
-                    </>
+                    <WhyNotAddMovies />
                   ) : (
                     data.user.movies.map((movie, i) => {
                       return (

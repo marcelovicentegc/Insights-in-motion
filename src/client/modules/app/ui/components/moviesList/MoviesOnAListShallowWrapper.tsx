@@ -1,6 +1,6 @@
 import { inject, observer } from "mobx-react";
 import * as React from "react";
-import { Query } from "react-apollo";
+import Query from "react-apollo/Query";
 import { getMovies } from "../../../../../../server/schema/graphql/Queries.graphql";
 import { MoviesStore } from "../../../../../stores/Movies.store";
 import {
@@ -14,7 +14,7 @@ import {
   NoSuchTitle,
   TypeInYourFavoriteMovie
 } from "../messages";
-import MovieDetailWrapper from "../movieDetails/MovieDetailWrapper";
+import MovieDetailsWrapper from "../movieDetails/MovieDetailsWrapper";
 import MoviesOnAList from "./MoviesOnAList";
 
 interface Props {
@@ -55,7 +55,7 @@ export default class MoviesOnAListShallowWrapper extends React.Component<
                   />
                 </>
               ) : (
-                <MovieDetailWrapper
+                <MovieDetailsWrapper
                   withALoggedInUser={this.props.withALoggedInUser}
                   movieId={this.props.moviesStore.selectedMovie}
                 />

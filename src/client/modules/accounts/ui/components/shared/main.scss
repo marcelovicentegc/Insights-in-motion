@@ -184,8 +184,22 @@
   }
 }
 
-.list-wrapper {
-  @include logoAndListStyles();
-  margin-top: 30px;
-  margin-bottom: 20px;
+.extra-wrapper {
+  text-align: center;
+
+  .list-wrapper {
+    @include logoAndListStyles();
+    display: inline-flex;
+    padding-right: 10px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+  }
+
+  .stats-wrapper {
+    @include logoAndListStyles();
+    display: inline-flex;
+    padding-left: 10px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+  }
 }
