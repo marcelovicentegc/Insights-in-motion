@@ -78,6 +78,18 @@ export const getMovieGenres = gql`
   }
 `;
 
+export const getTrendingMovies = gql`
+  query GetTrendingMovies {
+    trending_movies {
+      results {
+        id
+        poster_path
+        backdrop_path
+      }
+    }
+  }
+`;
+
 export const getConfig = gql`
   query GetConfig {
     config {

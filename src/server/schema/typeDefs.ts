@@ -69,12 +69,23 @@ const typeDefs = gql`
     images: Images
   }
 
+  type TrendingMovie {
+    id: Int
+    poster_path: String
+    backdrop_path: String
+  }
+
+  type TrendingMovies {
+    results: [TrendingMovie]
+  }
+
   type Query {
     users: [User!]!
     user: User!
     movies(query: String!): [Movie]
     movie(id: Int!): Movie
     movie_genres: [Genre]
+    trending_movies: TrendingMovies
     config: Config
   }
 

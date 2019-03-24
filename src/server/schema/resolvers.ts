@@ -44,6 +44,11 @@ const resolvers: IResolvers = {
         .then(res => res.json())
         .then(({ genres }) => genres);
     },
+    trending_movies: async (_, __, context) => {
+      return await fetch(
+        `${TMDB_API_URL}/movie/popular/?api_key=${context.secret.API_KEY}`
+      ).then(res => res.json());
+    },
     config: async (_, __, context) => {
       return fetch(
         `${TMDB_API_URL}/configuration?api_key=${context.secret.API_KEY}`

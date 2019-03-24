@@ -269,6 +269,30 @@ export type GetMovieGenresMovieGenres = {
   name: Maybe<string>;
 };
 
+export type GetTrendingMoviesVariables = {};
+
+export type GetTrendingMoviesQuery = {
+  __typename?: "Query";
+
+  trending_movies: Maybe<GetTrendingMoviesTrendingMovies>;
+};
+
+export type GetTrendingMoviesTrendingMovies = {
+  __typename?: "TrendingMovies";
+
+  results: Maybe<(Maybe<GetTrendingMoviesResults>)[]>;
+};
+
+export type GetTrendingMoviesResults = {
+  __typename?: "TrendingMovie";
+
+  id: Maybe<number>;
+
+  poster_path: Maybe<string>;
+
+  backdrop_path: Maybe<string>;
+};
+
 export type GetConfigVariables = {};
 
 export type GetConfigQuery = {

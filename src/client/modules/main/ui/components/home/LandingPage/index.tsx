@@ -1,34 +1,12 @@
-import { inject, observer } from "mobx-react";
 import * as React from "react";
 import { RouteComponentProps, withRouter } from "react-router";
-import { AccountsStore } from "../../../../../stores/Accounts.store";
-import { MoviesStore } from "../../../../../stores/Movies.store";
-import Logo from "../../../../accounts/ui/components/shared/Logo";
-import Nav from "../shared/Nav";
+import Logo from "../../../../../accounts/ui/components/shared/Logo";
 import "./main.scss";
 
-interface Props extends RouteComponentProps {
-  moviesStore?: MoviesStore;
-  accountsStore?: AccountsStore;
-}
-
-@inject("moviesStore", "accountsStore")
-@observer
-class LandingView extends React.Component<Props> {
-  resetQuery = () => {
-    this.props.moviesStore.resetQuery();
-  };
-
-  private resetCredentials = () => {
-    this.props.accountsStore.resetCredentials();
-  };
-
+class LandingPage extends React.Component<{} & RouteComponentProps<{}>, null> {
   render() {
     return (
       <>
-        {this.resetCredentials()}
-        {this.resetQuery()}
-        <Nav />
         <div className="landing-wrapper">
           <div className="presentation">
             <p>
@@ -50,10 +28,9 @@ class LandingView extends React.Component<Props> {
             <Logo to="/app" title="InsightInMotion app" icon="🎬" />
           </div>
         </div>
-        <div className="floating-posters" />
       </>
     );
   }
 }
 
-export default withRouter(LandingView);
+export default withRouter(LandingPage);
