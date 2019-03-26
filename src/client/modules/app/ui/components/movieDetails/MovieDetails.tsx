@@ -12,6 +12,7 @@ interface Props {
   movie: GetMovieMovie;
   moviesStore?: MoviesStore;
   withALoggedInUser: boolean;
+  withRegisteredUserLenses: boolean;
 }
 
 @inject("moviesStore")
@@ -24,14 +25,29 @@ export default class MovieDetail extends React.Component<Props> {
   render() {
     return (
       <>
-        <Tagline tagline={this.props.movie.tagline} />
-        <div className="movie-details">
-          <FreeMovieDetail movie={this.props.movie} />
-          {this.props.withALoggedInUser ? (
-            <ExtraMovieDetail movie={this.props.movie} />
-          ) : null}
-        </div>
-        <ReturnButton handleMovieView={this.handleMovieView} />
+        {this.props.withRegisteredUserLenses ? (
+          <>
+            <div className="movie-details with-registered-user-lenses">
+              <FreeMovieDetail movie={this.props.movie} />
+              {this.props.withALoggedInUser ? (
+                <ExtraMovieDetail movie={this.props.movie} />
+              ) : null}
+            </div>
+            <ReturnButton handleMovieView={this.handleMovieView} />
+            {/* RemoveMovieFromList */}
+          </>
+        ) : (
+          <>
+            <Tagline tagline={this.props.movie.tagline} />
+            <div className="movie-details">
+              <FreeMovieDetail movie={this.props.movie} />
+              {this.props.withALoggedInUser ? (
+                <ExtraMovieDetail movie={this.props.movie} />
+              ) : null}
+            </div>
+            <ReturnButton handleMovieView={this.handleMovieView} />
+          </>
+        )}
       </>
     );
   }

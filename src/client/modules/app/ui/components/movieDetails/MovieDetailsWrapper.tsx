@@ -30,6 +30,7 @@ export default class MovieDetailsWrapper extends React.Component<Props> {
               <MovieDetails
                 movie={data.movie}
                 withALoggedInUser={this.props.withALoggedInUser}
+                withRegisteredUserLenses={false}
               />
             );
           }}

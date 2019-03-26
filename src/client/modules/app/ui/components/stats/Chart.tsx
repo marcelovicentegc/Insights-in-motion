@@ -25,12 +25,9 @@ export default class Chart extends React.Component<Props, State> {
       labels: [],
       dataset: []
     };
-
-    this.checkPromiseState = this.checkPromiseState.bind(this);
-    this.checkPromiseState();
   }
 
-  checkPromiseState = () => {
+  componentDidMount() {
     var wrappedLabelsPromise = bluebird.Promise.resolve(
       this.props.labelsPromise
     );
@@ -63,7 +60,7 @@ export default class Chart extends React.Component<Props, State> {
         null;
       }
     });
-  };
+  }
 
   render() {
     return (

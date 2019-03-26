@@ -41,4 +41,8 @@
       }
     }
   }
+
+  &.with-registered-user-lenses {
+    height: calc(100vh - calc(90px + 87px));
+  }
 }
