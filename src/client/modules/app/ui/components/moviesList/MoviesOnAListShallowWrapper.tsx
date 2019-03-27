@@ -30,40 +30,42 @@ export default class MoviesOnAListShallowWrapper extends React.Component<
   Props
 > {
   render() {
-    this.props.moviesStore.movieList;
     return (
-      <Query<GetMoviesQuery, GetMoviesVariables>
-        query={getMovies}
-        variables={{ query: this.props.moviesStore.query }}
-        fetchPolicy="cache-and-network"
-        notifyOnNetworkStatusChange={true}
-      >
-        {({ data, loading }) => {
-          if (loading) return <Loading />;
-          if (!data) return <NoData />;
-          if (data.movies === null) return <TypeInYourFavoriteMovie />;
-          if (data.movies.length === 0) return <NoSuchTitle />;
-          return (
-            <>
-              {this.props.moviesStore.movieList ? (
-                <>
-                  <MoviesOnAList
-                    data={data}
-                    user={this.props.user}
+      <>
+        {this.props.moviesStore.movieList}
+        <Query<GetMoviesQuery, GetMoviesVariables>
+          query={getMovies}
+          variables={{ query: this.props.moviesStore.query }}
+          fetchPolicy="cache-and-network"
+          notifyOnNetworkStatusChange={true}
+        >
+          {({ data, loading }) => {
+            if (loading) return <Loading />;
+            if (!data) return <NoData />;
+            if (data.movies === null) return <TypeInYourFavoriteMovie />;
+            if (data.movies.length === 0) return <NoSuchTitle />;
+            return (
+              <>
+                {this.props.moviesStore.movieList ? (
+                  <>
+                    <MoviesOnAList
+                      data={data}
+                      user={this.props.user}
+                      withALoggedInUser={this.props.withALoggedInUser}
+                      userMovies={this.props.userMovies}
+                    />
+                  </>
+                ) : (
+                  <MovieDetailsWrapper
                     withALoggedInUser={this.props.withALoggedInUser}
-                    userMovies={this.props.userMovies}
+                    movieId={this.props.moviesStore.selectedMovie}
                   />
-                </>
-              ) : (
-                <MovieDetailsWrapper
-                  withALoggedInUser={this.props.withALoggedInUser}
-                  movieId={this.props.moviesStore.selectedMovie}
-                />
-              )}
-            </>
-          );
-        }}
-      </Query>
+                )}
+              </>
+            );
+          }}
+        </Query>
+      </>
     );
   }
 }

@@ -38,10 +38,10 @@ export default class Chart extends React.Component<Props, State> {
 
     wrappedLabelsPromise.then(labels => {
       if (wrappedLabelsPromise.isResolved()) {
-        this.setState({
+        this.setState(() => ({
           labelPromiseIsResolved: true,
           labels: labels.toString().split(",")
-        });
+        }));
       } else {
         null;
       }
@@ -49,13 +49,13 @@ export default class Chart extends React.Component<Props, State> {
 
     wrappedDatasetPromise.then(dataset => {
       if (wrappedDatasetPromise.isResolved()) {
-        this.setState({
+        this.setState(() => ({
           datasetPromiseIsResolved: true,
           dataset: dataset
             .toString()
             .split(",")
             .map(Number)
-        });
+        }));
       } else {
         null;
       }

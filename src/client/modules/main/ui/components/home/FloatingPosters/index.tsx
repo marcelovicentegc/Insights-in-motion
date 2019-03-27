@@ -22,10 +22,12 @@ const FloatingPosters = () => {
             <Query<GetTrendingMoviesQuery> query={getTrendingMovies}>
               {({ data, loading }) => {
                 if (loading) return null;
-                return data.trending_movies.results.slice(0, 10).map(result => {
-                  let posterUrl = baseUrl + posterSize + result.poster_path;
-                  return <img src={posterUrl} />;
-                });
+                return data.trending_movies.results
+                  .slice(0, 10)
+                  .map((result, i) => {
+                    let posterUrl = baseUrl + posterSize + result.poster_path;
+                    return <img key={i} src={posterUrl} />;
+                  });
               }}
             </Query>
           );
