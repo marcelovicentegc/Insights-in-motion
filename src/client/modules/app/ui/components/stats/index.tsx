@@ -15,43 +15,53 @@ import Nav from "../../../../main/ui/components/shared/Nav";
 import Chart from "./Chart";
 import "./main.scss";
 
-export default class StatsView extends React.Component {
+interface Props {}
+
+export default class StatsView extends React.Component<Props> {
+  constructor(props: Props) {
+    super(props);
+  }
+
+  genres: {
+    [data: string]: {
+      datasets: Array<number>;
+      labels: Array<string>;
+    };
+  } = {};
+  genreNames: Array<string> = [];
+  genreFreq: Dictionary<number> = {};
+  genreFreqStore: Array<Dictionary<number>> = [];
+
+  getData = () => {
+    var lastFreqSet = this.genreFreqStore.pop();
+    var keys = keysIn(lastFreqSet);
+    var values = valuesIn(lastFreqSet);
+    return {
+      keys,
+      values
+    };
+  };
+
+  gotDatasets = async () => {
+    var datasets = new Promise((resolve, reject) => {
+      window.setTimeout(() => {
+        resolve(this.getData().values);
+      }, 5000);
+    });
+    return datasets;
+  };
+
+  gotLabels = async () => {
+    var labels = new Promise((resolve, reject) => {
+      window.setTimeout(() => {
+        resolve(this.getData().keys);
+      }, 5000);
+    });
+    return labels;
+  };
+
   render() {
-    var genres: {
-      [data: string]: { datasets: Array<number>; labels: Array<string> };
-    } = {};
-    genres.data = { datasets: [], labels: [] };
-    let genreNames: Array<string> = [];
-    let genreFreq: Dictionary<number> = {};
-    let genreFreqStore: Array<Dictionary<number>> = [];
-
-    const getData = () => {
-      var lastFreqSet = genreFreqStore.pop();
-      var keys = keysIn(lastFreqSet);
-      var values = valuesIn(lastFreqSet);
-      return {
-        keys,
-        values
-      };
-    };
-
-    const gotDatasets = async () => {
-      var datasets = new Promise((resolve, reject) => {
-        window.setTimeout(() => {
-          resolve(getData().values);
-        }, 5000);
-      });
-      return datasets;
-    };
-
-    const gotLabels = async () => {
-      var labels = new Promise((resolve, reject) => {
-        window.setTimeout(() => {
-          resolve(getData().keys);
-        }, 5000);
-      });
-      return labels;
-    };
+    this.genres.data = { datasets: [], labels: [] };
     return (
       <>
         <Nav />
@@ -70,22 +80,28 @@ export default class StatsView extends React.Component {
                 >
                   {({ data, loading }) => {
                     if (loading) return null;
-
-                    return data.movie.genres.map(genre => {
-                      genreNames.push(genre.name);
-                      genreFreq = countBy(genreNames);
-                      genreFreqStore.push(genreFreq);
-                      genres.data.datasets.push(genre.id);
-                      genres.data.labels.push(genre.name);
-                      return;
-                    });
+                    if (data.movie.genres !== null) {
+                      return data.movie.genres.map(genre => {
+                        this.genreNames.push(genre.name);
+                        this.genreFreq = countBy(this.genreNames);
+                        this.genreFreqStore.push(this.genreFreq);
+                        this.genres.data.datasets.push(genre.id);
+                        this.genres.data.labels.push(genre.name);
+                        return;
+                      });
+                    } else {
+                      return null;
+                    }
                   }}
                 </Query>
               );
             });
           }}
         </Query>
-        <Chart labelsPromise={gotLabels()} datasetsPromise={gotDatasets()} />
+        <Chart
+          labelsPromise={this.gotLabels()}
+          datasetsPromise={this.gotDatasets()}
+        />
       </>
     );
   }

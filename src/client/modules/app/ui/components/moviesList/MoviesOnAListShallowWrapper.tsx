@@ -30,9 +30,9 @@ export default class MoviesOnAListShallowWrapper extends React.Component<
   Props
 > {
   render() {
+    this.props.moviesStore.movieList;
     return (
       <>
-        {this.props.moviesStore.movieList}
         <Query<GetMoviesQuery, GetMoviesVariables>
           query={getMovies}
           variables={{ query: this.props.moviesStore.query }}

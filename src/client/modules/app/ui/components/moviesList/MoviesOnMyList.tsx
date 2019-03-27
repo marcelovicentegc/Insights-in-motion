@@ -27,9 +27,9 @@ export default class MoviesOnMyList extends React.Component<Props> {
     this.props.moviesStore.handleMovieView();
   };
   render() {
+    this.props.moviesStore.movieList;
     return (
       <>
-        {this.props.moviesStore.movieList}
         <Query<GetUserQuery> query={getUser}>
           {({ data, loading }) => {
             if (loading) return <Loading />;
