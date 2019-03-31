@@ -1,32 +1,17 @@
-import { inject, observer } from "mobx-react";
 import * as React from "react";
 import Query from "react-apollo/Query";
 import { Redirect } from "react-router";
 import { Link } from "react-router-dom";
 import { getUser } from "../../../../../../server/schema/graphql/Queries.graphql";
-import { AccountsStore } from "../../../../../stores/Accounts.store";
-import { MoviesStore } from "../../../../../stores/Movies.store";
 import { GetUserQuery } from "../../../../../__types__/typeDefs";
 import { Loading } from "../../../../app/ui/components/messages/index";
 import Nav from "../../../../main/ui/components/shared/Nav";
 import EditAccount from "./EditAccount";
 
-interface Props {
-  moviesStore?: MoviesStore;
-  accountsStore?: AccountsStore;
-}
-
-@inject("moviesStore", "accountsStore")
-@observer
-export default class AccountSettings extends React.Component<Props> {
-  resetQuery = () => {
-    this.props.moviesStore.resetQuery();
-  };
-
+export default class AccountSettings extends React.Component {
   render() {
     return (
       <>
-        {this.resetQuery()}
         <Nav />
         <Query<GetUserQuery> query={getUser}>
           {({ data, loading }) => {

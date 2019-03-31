@@ -12,28 +12,22 @@ interface Props extends RouteComponentProps {
   accountsStore?: AccountsStore;
 }
 
-@inject("moviesStore", "accountsStore")
+@inject("accountsStore")
 @observer
 class LogOut extends React.Component<Props> {
-  resetQuery = () => {
-    this.props.moviesStore.resetQuery();
-  };
-
-  resetCredentials = () => {
+  componentWillUnmount() {
     this.props.accountsStore.resetCredentials();
-  };
+  }
 
   render() {
     return (
       <>
-        {this.resetQuery()}
         <Mutation<LogoutUserMutation> mutation={logoutUser}>
           {(mutate, { client }) => (
             <a
               onClick={async () => {
                 await mutate();
                 await client.resetStore();
-                this.props.accountsStore.resetCredentials();
                 this.props.history.push("/");
               }}
             >

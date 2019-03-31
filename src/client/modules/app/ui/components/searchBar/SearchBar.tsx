@@ -14,6 +14,10 @@ interface State {
 @inject("moviesStore")
 @observer
 export default class SearchBar extends React.Component<Props, State> {
+  componentDidMount() {
+    this.props.moviesStore.resetQuery();
+  }
+
   state = {
     query: ""
   };

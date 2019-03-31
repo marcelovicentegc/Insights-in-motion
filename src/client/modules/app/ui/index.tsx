@@ -13,14 +13,13 @@ interface Props {
 @inject("accountsStore")
 @observer
 export default class AppView extends React.Component<Props> {
-  private resetCredentials = () => {
+  componentDidMount() {
     this.props.accountsStore.resetCredentials();
-  };
+  }
 
   render() {
     return (
       <>
-        {this.resetCredentials()}
         <Nav />
         <SearchBar />
         <MoviesOnAListDeepWrapper />

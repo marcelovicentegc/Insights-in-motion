@@ -18,20 +18,16 @@ interface Props extends RouteComponentProps {
   accountsStore?: AccountsStore;
 }
 
-@inject("moviesStore", "accountsStore")
+@inject("accountsStore")
 @observer
 class Login extends React.Component<Props> {
-  resetQuery = () => {
-    this.props.moviesStore.resetQuery();
-  };
-
-  private resetCredentials = () => {
+  componentDidMount() {
     this.props.accountsStore.resetCredentials();
-  };
+  }
 
-  private success = () => {
-    return this.props.accountsStore.success();
-  };
+  componentWillUnmount() {
+    this.props.accountsStore.resetCredentials();
+  }
 
   render() {
     this.props.accountsStore.errorMessage;
@@ -39,7 +35,6 @@ class Login extends React.Component<Props> {
     this.props.accountsStore.password;
     return (
       <>
-        {this.resetQuery()}
         <Logo to="/" title="Go to the landing page" icon="🎥" />
         <Mutation<LoginUserMutation, LoginUserVariables>
           mutation={loginUser}
@@ -82,7 +77,9 @@ class Login extends React.Component<Props> {
                           password: this.props.accountsStore.password
                         }
                       });
-                      this.success() ? this.props.history.push("/") : null;
+                      this.props.accountsStore.success()
+                        ? this.props.history.push("/")
+                        : null;
                     }}
                   >
                     Sign in
@@ -90,10 +87,7 @@ class Login extends React.Component<Props> {
                 </div>
                 <div className="form" id="form-callout">
                   <label>
-                    Don't have an account?{" "}
-                    <Link to="/join" onClick={() => this.resetCredentials()}>
-                      Create one.
-                    </Link>
+                    Don't have an account? <Link to="/join">Create one.</Link>
                   </label>
                 </div>
               </div>

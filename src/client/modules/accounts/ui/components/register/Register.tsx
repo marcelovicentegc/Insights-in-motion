@@ -22,18 +22,13 @@ interface Props extends RouteComponentProps {
 @inject("moviesStore", "accountsStore")
 @observer
 class Register extends React.Component<Props> {
-  resetQuery = () => {
-    this.props.moviesStore.resetQuery();
-  };
-
-  private resetCredentials = () => {
+  componentDidMount() {
     this.props.accountsStore.resetCredentials();
-  };
+  }
 
-  private success = () => {
-    return this.props.accountsStore.success();
-  };
-
+  componentWillUnmount() {
+    this.props.accountsStore.resetCredentials();
+  }
   render() {
     this.props.accountsStore.errorMessage;
     this.props.accountsStore.email;
@@ -41,7 +36,6 @@ class Register extends React.Component<Props> {
     this.props.accountsStore.password;
     return (
       <>
-        {this.resetQuery()}
         <Logo to="/" title="Go to the landing page" icon="🎥" />
         <Mutation<CreateUserMutation, CreateUserVariables>
           mutation={createUser}
@@ -100,7 +94,9 @@ class Register extends React.Component<Props> {
                           password: this.props.accountsStore.password
                         }
                       });
-                      this.success() ? this.props.history.push("/") : null;
+                      this.props.accountsStore.success()
+                        ? this.props.history.push("/")
+                        : null;
                     }}
                   >
                     Create an account
@@ -108,10 +104,7 @@ class Register extends React.Component<Props> {
                 </div>
                 <div className="form" id="form-callout">
                   <label>
-                    Already have an account?{" "}
-                    <Link to="/login" onClick={() => this.resetCredentials()}>
-                      Sign in.
-                    </Link>
+                    Already have an account? <Link to="/login">Sign in.</Link>
                   </label>
                 </div>
               </div>
