@@ -1,34 +1,43 @@
+import { inject, observer } from "mobx-react";
 import * as React from "react";
 import Mutation from "react-apollo/Mutation";
 import { updateUser } from "../../../../../../server/schema/graphql/Mutations.graphql";
 import { getUser } from "../../../../../../server/schema/graphql/Queries.graphql";
+import { AccountsStore } from "../../../../../stores/Accounts.store";
 import {
   GetUserUser,
   UpdateUserMutation,
   UpdateUserVariables
 } from "../../../../../__types__/typeDefs";
+import Error from "../shared/Error";
+import Success from "../shared/Success";
 
 interface Props {
   user: GetUserUser;
+  accountsStore?: AccountsStore;
 }
 
 interface State {
-  email: string;
-  username: string;
-  password: string;
-  errorMessage: string;
+  success: boolean;
 }
 
+@inject("accountsStore")
+@observer
 export default class EditAccount extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
     this.state = {
-      email: "",
-      username: "",
-      password: "",
-      errorMessage: undefined
+      success: false
     };
+  }
+
+  componentDidMount() {
+    this.props.accountsStore.resetCredentials();
+  }
+
+  componentWillUnmount() {
+    this.props.accountsStore.resetCredentials();
   }
 
   private emailInput = React.createRef<HTMLInputElement>();
@@ -77,31 +86,36 @@ export default class EditAccount extends React.Component<Props, State> {
         (submitButtonStyle.border = "1px solid rgba(27, 31, 35, 0.2)"));
   };
 
-  success = (errorMessage: string) => {
-    if (errorMessage.length !== 0) {
-      return false;
-    } else {
-      return true;
-    }
-  };
-
   render() {
+    this.props.accountsStore.errorMessage;
+    this.props.accountsStore.email = this.props.user.email;
+    this.props.accountsStore.username = this.props.user.username;
+    this.props.accountsStore.password = this.props.user.password;
     return (
       <Mutation<UpdateUserMutation, UpdateUserVariables>
         mutation={updateUser}
-        variables={{
-          id: this.props.user.id.toString(),
-          email: this.props.user.email,
-          username: this.props.user.username,
-          password: this.props.user.password
-        }}
         refetchQueries={[{ query: getUser }]}
-        onError={error => this.setState({ errorMessage: error.message })}
+        onError={error =>
+          (this.props.accountsStore.errorMessage = error.message.slice(15, 100))
+        }
       >
         {mutate => (
           <div className="form-wrapper" id="edit-wrapper">
-            {/* errors */}
-            <div className="form" id="edit">
+            {this.props.accountsStore.errorMessage ? (
+              <Error message={this.props.accountsStore.errorMessage} />
+            ) : null}
+            {this.state.success ? (
+              <Success message={"Your account was succesfully updated"} />
+            ) : null}
+            <div
+              className="form"
+              id="edit"
+              style={
+                this.props.accountsStore.errorMessage || this.state.success
+                  ? { marginTop: "0vh" }
+                  : { marginTop: "5vh" }
+              }
+            >
               <label onClick={e => this.displayInput(this.emailInput)}>
                 Email adress
               </label>
@@ -111,7 +125,11 @@ export default class EditAccount extends React.Component<Props, State> {
                 id="edit-email"
                 type="text"
                 placeholder={this.props.user.email}
-                onChange={e => this.setState({ email: e.target.value })}
+                autoCapitalize="off"
+                onChange={e => {
+                  this.props.accountsStore.email = e.target.value;
+                  this.props.accountsStore.errorMessage = undefined;
+                }}
               />
               <label onClick={e => this.displayInput(this.usernameInput)}>
                 Username
@@ -122,7 +140,11 @@ export default class EditAccount extends React.Component<Props, State> {
                 id="edit-username"
                 type="text"
                 placeholder={this.props.user.username}
-                onChange={e => this.setState({ username: e.target.value })}
+                autoComplete="off"
+                onChange={e => {
+                  this.props.accountsStore.username = e.target.value;
+                  this.props.accountsStore.errorMessage = undefined;
+                }}
               />
               <label onClick={e => this.displayInput(this.passwordInput)}>
                 Password
@@ -132,7 +154,11 @@ export default class EditAccount extends React.Component<Props, State> {
                 ref={this.passwordInput}
                 id="edit-password"
                 type="password"
-                onChange={e => this.setState({ password: e.target.value })}
+                autoComplete="off"
+                onChange={e => {
+                  this.props.accountsStore.password = e.target.value;
+                  this.props.accountsStore.errorMessage = undefined;
+                }}
               />
               <button
                 ref={this.submitButton}
@@ -151,14 +177,26 @@ export default class EditAccount extends React.Component<Props, State> {
                   await mutate({
                     variables: {
                       id: this.props.user.id.toString(),
-                      email: this.state.email || this.props.user.email,
-                      username: this.state.username || this.props.user.username,
-                      password: this.state.password || this.props.user.password
+                      email:
+                        this.props.accountsStore.email.length === 0
+                          ? this.props.user.email
+                          : this.props.accountsStore.email,
+                      username:
+                        this.props.accountsStore.username.length === 0
+                          ? this.props.user.username
+                          : this.props.accountsStore.username,
+                      password:
+                        this.props.accountsStore.password.length === 0
+                          ? this.props.user.password
+                          : this.props.accountsStore.password
                     }
+                  }).then(() => {
+                    this.props.accountsStore.success()
+                      ? this.setState({
+                          success: true
+                        })
+                      : null;
                   });
-                  this.success(this.state.errorMessage)
-                    ? window.location.reload()
-                    : null;
                 }}
               >
                 Update info

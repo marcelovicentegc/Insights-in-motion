@@ -4,12 +4,12 @@ interface Props {
   message: string;
 }
 
-const Error: React.FC<Props> = props => {
+const Success: React.FC<Props> = props => {
   return (
-    <div className="message error">
+    <div className="message success">
       <p>{props.message}</p>
     </div>
   );
 };
 
-export default Error;
+export default Success;

@@ -92,13 +92,46 @@ const resolvers: IResolvers = {
       return null;
     },
     updateUser: async (_, { id, email, username, password }) => {
+      const user = await User.findOne(id);
+      const emailAlreadyExists = await User.findOne({
+        where: { email },
+        select: ["id"]
+      });
+      if (emailAlreadyExists && emailAlreadyExists.id !== user.id) {
+        throw new Error("Email " + duplicate);
+      }
+
+      const usernameAlreadyExists = await User.findOne({
+        where: { username },
+        select: ["id"]
+      });
+      if (usernameAlreadyExists && usernameAlreadyExists.id !== user.id) {
+        throw new Error("Username " + duplicate);
+      }
+
+      if (email.length !== 0 && !validEmail(email)) {
+        throw new Error(invalidEmail);
+      }
+      if (username.length !== 0 && !validUsername(username)) {
+        throw new Error(usernameNotLongEnough);
+      }
+      if (password.length !== 0 && !validPassword(password)) {
+        throw new Error(passwordNotLongEnough);
+      }
       try {
-        const hashedPassword = await bcrypt.hash(password, 12);
-        await User.update(id, {
-          email: email,
-          username: username,
-          password: hashedPassword
-        });
+        if (password === user.password) {
+          await User.update(id, {
+            email: email,
+            username: username
+          });
+        } else {
+          const hashedPassword = await bcrypt.hash(password, 12);
+          await User.update(id, {
+            email: email,
+            username: username,
+            password: hashedPassword
+          });
+        }
       } catch (error) {
         console.log(error);
         return false;

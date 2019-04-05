@@ -17,5 +17,4 @@ A web app that consumes the [TMDb](https://www.themoviedb.org/ "TMDb's homepage"
 
 ## To do
 
-1. [ ] Display update validation errors
-2. [ ] Format errors
+1. [ ] Format server-side errors

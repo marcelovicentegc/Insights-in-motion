@@ -35,7 +35,7 @@
   margin: 0 auto;
   width: 340px;
 
-  .error {
+  .message {
     border-radius: 5px;
     border-style: solid;
     border-width: 1px;
@@ -43,9 +43,18 @@
     font-size: 13px;
     margin: 0 0 10px;
     padding: 5px 20px;
-    background-color: #ffdce0;
-    color: #86181d;
     text-align: center;
+
+    &.error {
+      background-color: #ffdce0;
+
+      color: #86181d;
+    }
+
+    &.success {
+      color: #18862a;
+      background-color: #e4ffe9;
+    }
   }
 
   &#edit-wrapper {
