@@ -16,12 +16,14 @@ const FloatingPosters = () => {
       <Query<GetConfigQuery> query={getConfig}>
         {({ data, loading }) => {
           if (loading) return null;
+          if (!data || !data.config) return null;
           let baseUrl = data.config.images.secure_base_url;
           let posterSize = data.config.images.poster_sizes[0];
           return (
             <Query<GetTrendingMoviesQuery> query={getTrendingMovies}>
               {({ data, loading }) => {
                 if (loading) return null;
+                if (!data || !data.trending_movies) return null;
                 return data.trending_movies.results
                   .slice(0, 10)
                   .map((result, i) => {

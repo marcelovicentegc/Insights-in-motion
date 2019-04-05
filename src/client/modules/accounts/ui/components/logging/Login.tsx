@@ -3,6 +3,7 @@ import * as React from "react";
 import Mutation from "react-apollo/Mutation";
 import { Link, RouteComponentProps, withRouter } from "react-router-dom";
 import { loginUser } from "../../../../../../server/schema/graphql/Mutations.graphql";
+import { getUser } from "../../../../../../server/schema/graphql/Queries.graphql";
 import { AccountsStore } from "../../../../../stores/Accounts.store";
 import { MoviesStore } from "../../../../../stores/Movies.store";
 import {
@@ -18,9 +19,17 @@ interface Props extends RouteComponentProps {
   accountsStore?: AccountsStore;
 }
 
+interface State {
+  mutating: boolean;
+}
+
 @inject("accountsStore")
 @observer
-class Login extends React.Component<Props> {
+class Login extends React.Component<Props, State> {
+  state = {
+    mutating: false
+  };
+
   componentDidMount() {
     this.props.accountsStore.resetCredentials();
   }
@@ -41,6 +50,8 @@ class Login extends React.Component<Props> {
           onError={error =>
             (this.props.accountsStore.errorMessage = error.message)
           }
+          awaitRefetchQueries={true}
+          refetchQueries={[{ query: getUser }]}
         >
           {mutate => (
             <>
@@ -70,19 +81,30 @@ class Login extends React.Component<Props> {
                     name="password"
                   />
                   <button
+                    className={`${this.state.mutating ? "mutating" : ""}`}
                     onClick={async () => {
+                      this.setState({
+                        mutating: true
+                      });
                       await mutate({
                         variables: {
                           email: this.props.accountsStore.email,
                           password: this.props.accountsStore.password
                         }
+                      }).then(() => {
+                        this.props.accountsStore.success()
+                          ? this.props.history.push("/")
+                          : this.setState({
+                              mutating: false
+                            });
                       });
-                      this.props.accountsStore.success()
-                        ? this.props.history.push("/")
-                        : null;
                     }}
                   >
-                    Sign in
+                    {!this.state.mutating ? (
+                      <span>Sign in</span>
+                    ) : (
+                      <span>Signing in...</span>
+                    )}
                   </button>
                 </div>
                 <div className="form" id="form-callout">

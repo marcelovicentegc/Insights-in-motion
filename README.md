@@ -19,4 +19,3 @@ A web app that consumes the [TMDb](https://www.themoviedb.org/ "TMDb's homepage"
 
 1. [ ] Display update validation errors
 2. [ ] Format errors
-3. [ ] Add custom searches
