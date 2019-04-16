@@ -2,11 +2,15 @@ import { ApolloEngine } from "apollo-engine";
 import { ApolloServer } from "apollo-server-express";
 import * as bcrypt from "bcrypt";
 import * as bodyParser from "body-parser";
+import * as connectRedis from "connect-redis";
+import * as cors from "cors";
 import * as express from "express";
 import * as session from "express-session";
+import * as path from "path";
 import "reflect-metadata";
 import { createConnection } from "typeorm";
 import { User } from "./database/entities";
+import { redis } from "./redis";
 import schema from "./schema/schema";
 
 export const startServer = async () => {
@@ -53,8 +57,14 @@ export const startServer = async () => {
   });
 
   const app = express();
+
+  const RedisStore = connectRedis(session);
+
   app.use(
     session({
+      store: new RedisStore({
+        client: redis as any
+      }),
       secret: "9314i192481290",
       resave: false,
       saveUninitialized: false
@@ -69,6 +79,13 @@ export const startServer = async () => {
       credentials: true
     }
   });
+
+  if (process.env.NODE_ENV === "production") {
+    app.use(express.static(path.resolve("./dist")));
+    app.get("*", cors(), (req, res) => {
+      res.sendFile(path.resolve("./dist/index.html"));
+    });
+  }
 
   if (process.env.NODE_ENV === "withEngine") {
     const engine = new ApolloEngine({
@@ -90,11 +107,9 @@ export const startServer = async () => {
     );
   }
 
-  if (process.env.NODE_ENV === "development") {
-    app.listen(8080, () => {
-      console.log("Server is ready for requests on port 8080");
-    });
-  }
+  app.listen(8080, () => {
+    console.log("Server is ready for requests on port 8080");
+  });
 };
 
 startServer();
