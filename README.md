@@ -11,9 +11,10 @@ A web app that consumes the [TMDb](https://www.themoviedb.org/ "TMDb's homepage"
 3. Set an API key for TMDb on a `.env`
 4. If you are willing to use the Apollo Engine service, set an API key for it as well on the `.env`
 5. Create a Postgres database and set your credentials on a `ormconfig.json`
-6. Install dependencies: `yarn`
-7. Run the application with Apollo Server: `yarn start`; or with Apollo Engine: `yarn start-with-engine`
-8. As the database cleans itself whenever the server restarts for updates, there is a default user which you can log in with, with email: `user@example.com` and password `user`
+6. Start Redis server: sudo service redis-service start
+7. Install dependencies: `yarn`
+8. Run the application with Apollo Server: `yarn start`; or with Apollo Engine: `yarn start-with-engine`
+9. As the database cleans itself whenever the server restarts for updates, there is a default user which you can log in with, with email: `user@example.com` and password `user`
 
 ## To do
 
