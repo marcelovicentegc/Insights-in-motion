@@ -29,6 +29,11 @@ module.exports = {
       template: path.resolve(__dirname, "src", "client", "index.html"),
       filename: "index.html"
     }),
+    new webpack.DefinePlugin({
+      "process.env": {
+        TCP: JSON.stringify(process.env.TCP)
+      }
+    }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.optimize.AggressiveMergingPlugin(),
     new webpack.optimize.OccurrenceOrderPlugin()

@@ -10,10 +10,10 @@
     "client-wait": "wait-on tcp:8080 && yarn run client",
     "types": "gql-gen --config codegen.yml",
     "server": "nodemon -r dotenv/config",
-    "start": "cross-env NODE_ENV=development concurrently \"yarn run server\" \"yarn run client-wait\"",
-    "start-with-engine": "cross-env NODE_ENV=withEngine concurrently \"yarn run server\" \"yarn run client-wait\"",
+    "start": "cross-env NODE_ENV=development TCP=8080 concurrently \"yarn run server\" \"yarn run client-wait\"",
+    "start-with-engine": "cross-env NODE_ENV=withEngine TCP=8080 concurrently \"yarn run server\" \"yarn run client-wait\"",
     "test-wait": "wait-on tcp:8080 && jest",
-    "test-alone": "cross-env NODE_ENV=development concurrently --kill-others --success first \"yarn run server\" \"yarn run test-wait\"",
+    "test-alone": "cross-env NODE_ENV=development TCP=8080 concurrently --kill-others --success first \"yarn run server\" \"yarn run test-wait\"",
     "test": "jest",
     "lint": "tslint --init tslint.json 'src/**/*.ts'",
     "launch": "cross-env NODE_ENV=production node ./dist/server/index.js"

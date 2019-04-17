@@ -31,15 +31,16 @@ export const startServer = async () => {
         console.log("Connected to remote empty database");
       });
 
-      const hashedPassword = await bcrypt.hash("user", 12);
-      const user = User.create({
-        email: "user@example.com",
-        username: "Pierre",
-        password: hashedPassword
-      });
-      await user.save();
-      console.log("Default user created");
-
+      if (process.env.NODE_ENV === "development") {
+        const hashedPassword = await bcrypt.hash("user", 12);
+        const user = User.create({
+          email: "user@example.com",
+          username: "Pierre",
+          password: hashedPassword
+        });
+        await user.save();
+        console.log("Default user created");
+      }
       break;
     } catch (err) {
       console.log(err);
@@ -52,7 +53,7 @@ export const startServer = async () => {
   const server = new ApolloServer({
     schema,
     playground: {
-      endpoint: "/api/playground"
+      endpoint: "/graphql"
     },
     tracing: true,
     cacheControl: true,
@@ -83,7 +84,7 @@ export const startServer = async () => {
   app.use(bodyParser.json());
   server.applyMiddleware({
     app,
-    path: "/api/playground",
+    path: "/graphql",
     cors: {
       origin: ["http://localhost:3000", "http://127.0.0.1:3000"],
       credentials: true
@@ -105,7 +106,7 @@ export const startServer = async () => {
     engine.listen(
       {
         port: 8080,
-        graphqlPaths: ["/api/playground"],
+        graphqlPaths: ["/graphql"],
         expressApp: app,
         launcherOptions: {
           startupTimeout: 3000
@@ -117,9 +118,16 @@ export const startServer = async () => {
     );
   }
 
-  app.listen(8080, () => {
-    console.log("Server is ready for requests on port 8080");
-  });
+  if (process.env.NODE_ENV === "development") {
+    app.listen(8080, () => {
+      console.log("Server is ready for requests on port 8080");
+    });
+  }
+  if (process.env.NODE_ENV === "production") {
+    app.listen(4000, () => {
+      console.log("Server is ready for requests on port 4000");
+    });
+  }
 };
 
 startServer();

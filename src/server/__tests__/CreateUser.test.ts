@@ -1,7 +1,7 @@
 import * as faker from "faker";
 import { request } from "graphql-request";
 
-const url = `http://127.0.0.1:8080/api/playground`;
+const url = `http://127.0.0.1:8080/graphql`;
 const duplicatedEmail = faker.internet.email();
 const duplicatedUsername = faker.internet.userName();
 const password = faker.internet.password();
