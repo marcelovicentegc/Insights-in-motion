@@ -12,7 +12,7 @@ module.exports = {
   output: {
     filename: "bundle.js",
     path: path.resolve(__dirname, "dist/"),
-    publicPath: "/"
+    publicPath: "./"
   },
   devtool: "source-map",
   node: { fs: "empty" },
@@ -39,7 +39,7 @@ module.exports = {
         test: /\.tsx?$/,
         loader: "ts-loader",
         options: {
-          configFile: "tsconfig.json"
+          configFile: "tsconfig.client.json"
         },
         exclude: [/node_modules/]
       },

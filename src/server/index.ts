@@ -8,7 +8,7 @@ import * as express from "express";
 import * as session from "express-session";
 import * as path from "path";
 import "reflect-metadata";
-import { createConnection } from "typeorm";
+import { createConnection, getConnectionOptions } from "typeorm";
 import { User } from "./database/entities";
 import { redis } from "./redis";
 import schema from "./schema/schema";
@@ -16,8 +16,18 @@ import schema from "./schema/schema";
 export const startServer = async () => {
   let retries = 5;
   while (retries) {
+    if (process.env.NODE_ENV === "production") {
+      var connectionOptions = await getConnectionOptions();
+      Object.assign(connectionOptions, {
+        entities: ["dist/server/database/**/*.model.js"],
+        cli: {
+          entitiesDir: "dist/server/database/entities"
+        }
+      });
+    }
+
     try {
-      await createConnection().then(connection => {
+      await createConnection(connectionOptions).then(connection => {
         console.log("Connected to remote empty database");
       });
 

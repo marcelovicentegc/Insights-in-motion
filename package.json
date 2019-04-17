@@ -5,7 +5,7 @@
   "author": "Marcelo Cardoso",
   "license": "MIT",
   "scripts": {
-    "build": "rimraf dist && webpack --config webpack.config.js",
+    "build": "rimraf dist && webpack --config webpack.config.js && tsc --p tsconfig.server.json",
     "client": "webpack-dev-server --progress",
     "client-wait": "wait-on tcp:8080 && yarn run client",
     "types": "gql-gen --config codegen.yml",
@@ -16,7 +16,7 @@
     "test-alone": "cross-env NODE_ENV=development concurrently --kill-others --success first \"yarn run server\" \"yarn run test-wait\"",
     "test": "jest",
     "lint": "tslint --init tslint.json 'src/**/*.ts'",
-    "launch": "cross-env NODE_ENV=production ts-node --project ./src/server/tsconfig.json -r tsconfig-paths/register ./src/server/index.ts"
+    "launch": "cross-env NODE_ENV=production node ./dist/server/index.js"
   },
   "devDependencies": {
     "@types/apollo-upload-client": "^8.1.1",
