@@ -26,6 +26,7 @@ const client = new ApolloClient({
       if (networkError) console.log(`[Network error]: ${networkError}`);
     }),
     createUploadLink({
+      // On production, set this uri to your DNS.
       uri: `http://127.0.0.1:${
         process.env.TCP !== undefined ? process.env.TCP : "4000"
       }/graphql`,

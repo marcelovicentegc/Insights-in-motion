@@ -86,6 +86,7 @@ export const startServer = async () => {
     app,
     path: "/graphql",
     cors: {
+      // On production, set this uri to your DNS.
       origin: ["http://localhost:3000", "http://127.0.0.1:3000"],
       credentials: true
     }
@@ -93,9 +94,16 @@ export const startServer = async () => {
 
   if (process.env.NODE_ENV === "production") {
     app.use(express.static(path.resolve("./dist")));
-    app.get("*", cors(), (req, res) => {
-      res.sendFile(path.resolve("./dist/index.html"));
-    });
+    app.get(
+      "*",
+      cors({
+        // On production, set this uri to your DNS.
+        origin: ["http://localhost:3000", "http://127.0.0.1:3000"]
+      }),
+      (req, res) => {
+        res.sendFile(path.resolve("./dist/index.html"));
+      }
+    );
   }
 
   if (process.env.NODE_ENV === "withEngine") {
