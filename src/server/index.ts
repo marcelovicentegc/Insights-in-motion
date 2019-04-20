@@ -126,7 +126,10 @@ export const startServer = async () => {
     );
   }
 
-  if (process.env.NODE_ENV === "development") {
+  if (
+    process.env.NODE_ENV === "development" ||
+    process.env.NODE_ENV === "test"
+  ) {
     app.listen(8080, () => {
       console.log("Server is ready for requests on port 8080");
     });

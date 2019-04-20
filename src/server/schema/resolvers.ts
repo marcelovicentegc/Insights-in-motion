@@ -62,6 +62,14 @@ const resolvers: IResolvers = {
         select: ["id"]
       });
       if (emailAlreadyExists) {
+        if (process.env.NODE_ENV === "test") {
+          return [
+            {
+              path: "createUser",
+              message: "Email " + duplicate
+            }
+          ];
+        }
         throw new Error("Email " + duplicate);
       }
       const usernameAlreadyExists = await User.findOne({
@@ -69,15 +77,47 @@ const resolvers: IResolvers = {
         select: ["id"]
       });
       if (usernameAlreadyExists) {
+        if (process.env.NODE_ENV === "test") {
+          return [
+            {
+              path: "createUser",
+              message: "Username " + duplicate
+            }
+          ];
+        }
         throw new Error("Username " + duplicate);
       }
       if (!validEmail(email)) {
+        if (process.env.NODE_ENV === "test") {
+          return [
+            {
+              path: "createUser",
+              message: invalidEmail
+            }
+          ];
+        }
         throw new Error(invalidEmail);
       }
       if (!validUsername(username)) {
+        if (process.env.NODE_ENV === "test") {
+          return [
+            {
+              path: "createUser",
+              message: usernameNotLongEnough
+            }
+          ];
+        }
         throw new Error(usernameNotLongEnough);
       }
       if (!validPassword(password)) {
+        if (process.env.NODE_ENV === "test") {
+          return [
+            {
+              path: "createUser",
+              message: passwordNotLongEnough
+            }
+          ];
+        }
         throw new Error(passwordNotLongEnough);
       }
 
