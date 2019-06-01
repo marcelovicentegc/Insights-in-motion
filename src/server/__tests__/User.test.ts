@@ -12,7 +12,7 @@ const duplicatedEmail = faker.internet.email();
 const duplicatedUsername = faker.internet.userName();
 const password = faker.internet.password();
 
-const mutation = (email: string, username: string, password: string) => `
+const createUser = (email: string, username: string, password: string) => `
 mutation { 
   createUser(email: "${email}", username: "${username}", password: "${password}", avatar: null) {
       path
@@ -21,25 +21,58 @@ mutation {
   }
 `;
 
+const loginUser = (email: string | undefined, password: string) => `
+mutation {
+    loginUser(email: "${email}", password: "${password}") {
+      email
+    }
+}
+`;
+
+const logoutUser = () => `
+mutation {
+  logoutUser
+}
+`;
+
 describe("User tests ------------------------------------", () => {
   test("Create an user", async () => {
     const response = await request(
       url,
-      mutation(duplicatedEmail, duplicatedUsername, password)
+      createUser(duplicatedEmail, duplicatedUsername, password)
     );
     expect(response).toEqual({ createUser: null });
   });
+
+  test("Logs created user in", async () => {
+    const response = await request(url, loginUser(duplicatedEmail, password));
+    expect(response).toEqual({
+      loginUser: {
+        email: duplicatedEmail
+      }
+    });
+  });
+
+  test("Logs created user out", async () => {
+    const response = await request(url, logoutUser());
+    expect(response).toEqual({
+      logoutUser: true
+    });
+  });
+
   test("Raises duplicated email error", async () => {
     const response: any = await request(
       url,
-      mutation(duplicatedEmail, faker.internet.userName(), password)
+      createUser(duplicatedEmail, faker.internet.userName(), password)
     );
-    expect(response.errors);
+    expect(response).toEqual({
+      createUser: [{ message: "Email " + duplicate, path: "createUser" }]
+    });
   });
   test("Raises email length validation error", async () => {
     const response: any = await request(
       url,
-      mutation("a", faker.internet.email(), password)
+      createUser("a", faker.internet.email(), password)
     );
     expect(response.createUser).toHaveLength(1);
     expect(response).toEqual({
@@ -49,7 +82,7 @@ describe("User tests ------------------------------------", () => {
   test("Raises password length validation error", async () => {
     const response: any = await request(
       url,
-      mutation(faker.internet.email(), faker.internet.userName(), "k8")
+      createUser(faker.internet.email(), faker.internet.userName(), "k8")
     );
     expect(response.createUser).toHaveLength(1);
     expect(response).toEqual({
@@ -59,7 +92,7 @@ describe("User tests ------------------------------------", () => {
   test("Raises duplicated username validation error", async () => {
     const response: any = await request(
       url,
-      mutation(faker.internet.email(), duplicatedUsername, password)
+      createUser(faker.internet.email(), duplicatedUsername, password)
     );
     expect(response.createUser).toHaveLength(1);
     expect(response.createUser[0]).toEqual({
@@ -70,7 +103,7 @@ describe("User tests ------------------------------------", () => {
   test("Raises username length validation error", async () => {
     const response: any = await request(
       url,
-      mutation(faker.internet.email(), "ki", password)
+      createUser(faker.internet.email(), "ki", password)
     );
     expect(response.createUser).toHaveLength(1);
     expect(response).toEqual({

@@ -204,6 +204,10 @@ const resolvers: IResolvers = {
       return user;
     },
     logoutUser: async (_, __, { req, res }) => {
+      console.log(
+        "req.session -------------------------------------------------------------------\n",
+        req.session
+      );
       await new Promise(res => req.session.destroy(() => res()));
       res.clearCookie("connect.sid");
       return true;

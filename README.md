@@ -18,4 +18,4 @@ A web app that consumes the [TMDb](https://www.themoviedb.org/ "TMDb's homepage"
 
 ## To do
 
-1. [ ] Format server-side errors
+1. [ ] Set a Docker local development environment

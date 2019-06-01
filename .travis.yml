@@ -6,7 +6,6 @@ node_js:
 
 services:
   - docker
-  - redis-server
 
 before_script:
   - docker build -t iin .
