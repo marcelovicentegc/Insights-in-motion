@@ -94,7 +94,7 @@
     "graphql": "^14.1.1",
     "graphql-code-generator": "^0.17.0",
     "ioredis": "^4.9.0",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.19",
     "mathjs": "^5.8.0",
     "mobx": "^5.9.0",
     "mobx-react": "^5.4.3",
