@@ -92,7 +92,7 @@
     "express": "^4.16.4",
     "express-session": "^1.15.6",
     "graphql": "^14.1.1",
-    "graphql-code-generator": "^0.17.0",
+    "graphql-code-generator": "^0.18.2",
     "ioredis": "^4.9.0",
     "lodash": "^4.17.19",
     "mathjs": "^5.8.0",
