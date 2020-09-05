@@ -54,7 +54,7 @@
     "graphql-codegen-typescript-common": "^0.17.0",
     "html-webpack-plugin": "^3.2.0",
     "jest": "^24.4.0",
-    "node-sass": "^4.11.0",
+    "node-sass": "^4.13.1",
     "nodemon": "^1.18.10",
     "react-hot-loader": "^4.7.1",
     "rimraf": "^2.6.3",
